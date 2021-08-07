@@ -7,3 +7,5 @@
 ​	github:https://github.com/nowLetsgo/yyds0607.git	
 
 ​   gitee:https://gitee.com/nowletsgo/yyds0607.git
+
+如果你修改了代码 pull的时候可能会出问题
