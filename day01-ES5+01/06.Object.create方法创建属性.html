@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Object.create:  
+                - 创建对象的另外一种方法，得到一个Object的实例化对象
+                - Object.create()第一个参数：指定创建的新对象的原型对象
+
+
+        
+        */
+
+        //创建一个对象,并用普通方法进行扩展属性和方法 然后查看增删改遍历 都是正常操作
+        var obj1 = Object.create(null);
+
+        //增：给这个对象扩展属性和方法
+        obj1.name = "laowang";
+        obj1.age = 18;
+        console.log("增", obj1);
+
+        //改
+        obj1.name = "xiaowang";
+        console.log("改", obj1);
+
+        //删
+        delete obj1.age;
+        console.log("删", obj1);
+
+        //遍历
+        for (var key in obj1) {
+            console.log("遍历", key);
+        }
+
+        /* 
+            Object.create参数2：
+                - 是一个对象，叫属性描述，这个对象里书写每一个对象的属性
+                - 每一个对象key的属性值是一个对象，是对当前属性值的描述
+                - value：属性值
+                - writable：默认false，表示属性是否可写
+                - enumerable:默认false，表示属性是否可以被枚举出来
+                - configurable:默认false，表示属性能否被删除
+        
+        
+        */
+
+        //创建一个对象,使用create方法的第二个参数给对象扩展属性和方法
+        var obj2 = Object.create(null, {
+            name: {
+                value: "laowang",
+                writable: false,
+                enumerable: false,
+                configurable: false
+            },
+            age: {
+                value: 18,
+            }
+        });
+        console.log("obj2", obj2);
+
+        //改
+        obj2.name = "xiaowang";
+        obj2.age = "19";
+        console.log("obj2改", obj2);
+
+        //遍历
+        for (var key in obj2) {
+            console.log("obj2枚举", key);
+        }
+
+        //删
+        delete obj2.name;
+        delete obj2.age;
+        console.log("obj2删除", obj2);
+    </script>
+</body>
+
+</html>
