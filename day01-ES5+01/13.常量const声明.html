@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            常量：  
+                - 使用const来声明常量
+                - 有时候值是不能被改变的，我们使用常量保存这个值
+                - 特点：
+                    - 值不可变
+                    - 如果常量保存的是一个地址值，地址对应的值发生变化，只要地址不变，则是允许的
+                    - 一旦声明变量，就必须立即初始化，不能留到以后赋值
+                    - const声明的变量支持块作用域
+                    - const命令声明的常量也是不提升
+                    - const声明的常量，也与let一样不可重复声明
+                    - let const声明的全局变量或全局函数，不再是window对象的属性和方法，和window脱离
+        
+            在未来开发过程中，我们优先使用const声明，如果确定某个值是变量将来会被改变，则在换成let
+        */
+
+        {
+            const PI = 3.14;
+            console.log(PI);
+        }
+
+        // 值不可变
+        /* {
+            const PI = 3.14;
+            PI = 10; //TypeError: Assignment to constant variable
+        } */
+
+        //如果常量保存的是一个地址值，地址对应的值发生变化，只要地址不变，则是允许的
+        /* {
+            const o = {
+                name: "laowang"
+            }
+
+            // o = {}
+
+            o.age = 18;
+            console.log(o);
+
+        } */
+
+
+        //一旦声明变量，就必须立即初始化，不能留到以后赋值
+        /* {
+            const o; //Missing initializer in const declaration
+
+        } */
+
+
+        //命令声明的常量也是不提升
+        /* {
+            console.log(a); //Cannot access 'a' before initialization
+            const a = 1;
+        } */
+
+        //声明的常量，也与let一样不可重复声明
+        /* {
+            const a = 1; //Identifier 'a' has already been declared
+            const a = 2;
+        } */
+
+
+        // let const声明的全局变量或全局函数， 不再是window对象的属性和方法， 和window脱离
+        /* const a = 1;
+        console.log(a);
+        console.log(window.a); //undefined */
+    </script>
+</body>
+
+</html>
