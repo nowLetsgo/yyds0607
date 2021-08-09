@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            访问器属性：
+                - 可以给对象设置访问器属性，在读取访问器属性的值的时候，会调用getter函数，当设置访问器属性的时候，会调用setter函数
+                - 访问器属性的值包含一对setter和getter函数
+        
+        */
+
+        var obj = {
+            firstName: "yan",
+            lastName: "haijing"
+        }
+
+        //给obj扩展一个访问器属性(一般会把访问器属性用属性描述方式来书写)
+        Object.defineProperty(obj, "fullName", {
+            //当获取fullName属性的时候，会调用get函数，并且fullName属性的返回值就是get函数的返回值
+            get: function () {
+                //在访问器属性getter和setter函数中this指向当前的对象
+                return this.firstName + " " + this.lastName
+            },
+            set: function (val) {
+                //当给访问器属性设置值的时候，会默认调用访问器属性的setter方法，setter方法的第一个形参就是设置的值
+                console.log(val);
+
+                //对用户设置的值进行操作 设置给对象
+                var valArr = val.split(" ");
+                this.firstName = valArr[0]
+                this.lastName = valArr[1]
+            }
+        });
+
+
+        console.log(obj.fullName)
+
+        //给访问器属性设置值
+        obj.fullName = "lao li";
+        console.log("obj", obj);
+    </script>
+</body>
+
+</html>
