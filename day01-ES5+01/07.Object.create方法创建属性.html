@@ -57,7 +57,7 @@
             name: {
                 value: "laowang",
                 writable: false,
-                enumerable: false,
+                enumerable: true,
                 configurable: false
             },
             age: {
@@ -77,9 +77,17 @@
         }
 
         //删
-        delete obj2.name;
-        delete obj2.age;
-        console.log("obj2删除", obj2);
+        // delete obj2.name;
+        // delete obj2.age;
+        // console.log("obj2删除", obj2);
+
+
+
+
+        //enumerable为true的属性可以被转为字符串 其他情况不可以
+        console.log(obj2);
+        var obj3 = JSON.parse(JSON.stringify(obj2));
+        console.log(obj3);
     </script>
 </body>
 
