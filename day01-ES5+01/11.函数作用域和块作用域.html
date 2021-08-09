@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            函数作用域和块作用域：
+                函数作用域：
+                    - 作用域是用函数来划分的，在函数外声明的变量称作为全局变量，在函数内声明变量称作为局部变量
+                    - 所有用var声明的变量都符合函数作用域
+
+                块作用域：
+                    - 顾名思义，块作用域是用代码块（{}）区分开的，代码块内部声明的变量被称作为局部变量，代码块外部的声明的变量被称作为全局变量
+                    - 所有用let和const声明的变量符合块作用域
+        */
+
+        /* {
+            // 全局的
+            var a = 1;
+            //局部的
+            let b = 2;
+        }
+        console.log(a);
+        console.log(b); */
+
+
+        /* function fn() {
+            //两个都是局部变量
+            var c = 3;
+            let d = 4;
+        } */
+
+
+        //练习
+        /* if (true) {
+            let a = 1;
+        }
+        console.log(a); */
+
+
+
+
+        //奇怪的案例：
+
+        //ES5规定不允许在块作用域中声明函数，ES6规定可以在块作用域中声明函数，但是ES6允许浏览器在这个方面有自己的想法，所以一下这种写法并不规范
+        // fn();//报错
+        if (true) {
+            function fn() {
+                console.log(1);
+            }
+        }
+        fn(); //1
+
+
+        //如果一定要在块中声明一个函数，可以使用函数表达式的写法
+        if (true) {
+            let fn = function () {
+                console.log(1);
+            }
+        }
+    </script>
+</body>
+
+</html>

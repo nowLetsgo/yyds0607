@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            let声明：
+                用来声明变量，语法类似于var，但是所声明的变量，只能在块作用中有效，相当于提供了块作用域
+                特点：
+                    - 声明的变量符合块作用域
+                    - 块作用域也可以任意嵌套，也有作用域链
+                    - 没有声明提升
+                    - 不允许重复声明
+        
+        */
+        //1.声明的变量符合块作用域
+        /* {
+            let a = 1;
+        }
+        console.log(a); //ReferenceError: a is not defined */
+
+
+        //2.块作用域也可以任意嵌套，也有作用域链
+        /* {
+            let a = 1;
+
+            {
+                let c = 2;
+                console.log(a);
+            }
+            console.log(c);
+        } */
+
+        //3.没有声明提升
+        /* {
+            console.log(a); //Uncaught ReferenceError: Cannot access 'a' before initialization
+            let a = 1;
+        } */
+
+        //4.不允许重复声明
+        /* {
+            let a = 1;
+            let a = 2; // SyntaxError: Identifier 'a' has already been declared
+        } */
+
+
+        //5.for循环中i
+        //根据以下的分析 可以得到结论：for循环中条件声明语句中的i是独立的作用域，是for语句的代码块的父作用域
+        for (let i = 0; i < 5; i++) {
+            //验证for中的i也不属于for的块级作用域
+            // let i = "abc";
+            console.log(i);
+        }
+
+        //验证for中的i不是全局变量
+        // console.log(i); //ReferenceError: i is not defined
+
+
+
+        for (var i = 0; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i); //55555
+            })
+        }
+
+        for (var i = 0; i < 5; i++) {
+            (function (i) {
+                setTimeout(function () {
+                    console.log(i); //0 1 2 3 4
+                })
+            })(i)
+        }
+
+
+        //因为let的i是块级，并且for的小括号是for代码块的父作用域，定时器是一个函数和外层的块作用域构成了闭包
+        for (let i = 0; i < 5; i++) {
+            setTimeout(function () {
+                console.log(i); //0 1 2 3 4
+            })
+        }
+    </script>
+</body>
+
+</html>
