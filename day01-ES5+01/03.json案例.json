@@ -1,0 +1,28 @@
+{
+    "student": [{
+        "name": "laowang1",
+        "age": 18,
+        "sex": "男",
+        "hobby": ["唱", "跳", "rap"]
+    }, {
+        "name": "laowang2",
+        "age": 18,
+        "sex": "男",
+        "hobby": ["唱", "跳", "rap"]
+    }, {
+        "name": "laowang3",
+        "age": 18,
+        "sex": "男",
+        "hobby": ["唱", "跳", "rap"]
+    }, {
+        "name": "laowang4",
+        "age": 18,
+        "sex": "男",
+        "hobby": ["唱", "跳", "rap"]
+    }, {
+        "name": "laowang5",
+        "age": 18,
+        "sex": "男",
+        "hobby": ["唱", "跳", "rap"]
+    }]
+}

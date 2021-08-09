@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            严格模式：
+                什么是严格模式：
+                    - 除了正常运行模式(混杂模式)，ES5添加了第二种运行模式："严格模式"（strict mode）。
+                    - 顾名思义，这种模式使得Javascript在更严格的语法条件下运行
+
+                严格模式的目的：
+                    - 严格模式修复了一些导致 JavaScript引擎难以执行优化的缺陷：有时候，相同的代码，严格模式可以比非严格模式下运行得更快
+                    - 消除代码运行的一些不安全之处，为代码的安全运行保驾护航
+                    - 为未来新版本的JavaScript做好铺垫（ES6+）
+
+                使用：
+                    - 在函数或者全局的第一行书写'use strict'即可在函数或者全局开启严格模式
+
+                严格模式影响： 
+                    - 变量只能在声明以后使用
+                    - 禁止自定义函数this指向window
+                    - 创建eval作用域
+
+         */
+
+        //开启严格模式：
+
+        //1.变量只能在声明以后使用
+        // 'use strict';
+
+        // a = 1;
+
+        /* function fn() {
+            'use strict';
+            a = 1;
+        }
+        fn(); */
+
+
+
+        //2.禁止自定义函数this指向window
+        /* 'use strict';
+
+        function fn() {
+            console.log(this);
+        }
+        fn(); */
+
+        //3.创建eval作用域
+        'use strict';
+        eval('var a = 1');
+        console.log(a);
+    </script>
+</body>
+
+</html>

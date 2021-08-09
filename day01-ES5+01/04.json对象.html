@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //假设数据是从ajax请求过来的
+        var data = {
+            student: [{
+                "name": "laowang1",
+                "age": 18,
+                "sex": "男",
+                "hobby": ["唱", "跳", "rap"]
+            }, {
+                "name": "laowang2",
+                "age": 18,
+                "sex": "男",
+                "hobby": ["唱", "跳", "rap"]
+            }]
+        };
+
+
+        /* 
+            XML和HTML区别：
+                XML：保存和传输数据
+                HTML：展示数据
+
+            json:
+                什么是json：
+                    是一种轻量级的数据交换格式。JSON 与XML具有相同的特性，是一种数据存储格式，但是JSON相比XML 更易于人编写和阅读，更易于生成和解析
+
+                json字符串和json对象互转：
+                    - JSON.stringify(json对象)：把某个json对象转为json字符串
+                    - JSON.parse(json字符串):把json字符串转为json对象
+                
+        */
+
+        //json对象转json字符串
+        var dataStr = JSON.stringify(data);
+        console.log(dataStr);
+        console.log(typeof dataStr); //string
+
+        //json字符串转json对象
+        var dataObj = JSON.parse(dataStr);
+        console.log(dataObj);
+    </script>
+</body>
+
+</html>

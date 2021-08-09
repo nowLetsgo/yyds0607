@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //声明了一个对象
+        var obj1 = {
+            name: "laowang",
+            age: 18,
+            hobby: ["唱歌", "跳舞"],
+            do: function () {
+                console.log("我会rap");
+            }
+        };
+
+        //先把被拷贝的对象obj转成字符串(函数会忽略)
+        var objStr = JSON.stringify(obj1);
+        //把被拷贝对象的obj字符串 再转为 obj对象
+        var obj2 = JSON.parse(objStr);
+        //查看拷贝后的结果
+        console.log(obj2);
+
+        //查看和obj的地址是否一致
+        console.log(obj2 === obj1); //false
+        //查看是否深拷贝
+        console.log(obj2.hobby === obj1.hobby); //false
+    </script>
+</body>
+
+</html>
