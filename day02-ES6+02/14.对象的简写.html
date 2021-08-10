@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const name = "laowang";
+        const age = 18;
+        const sex = "nan";
+
+        //定义一个对象
+        /* const obj = {
+            name: name,
+            age: age,
+            sex: sex,
+            eat: function () {
+                console.log("eat");
+            }
+        }
+
+        console.log(obj); */
+
+
+        //对象的简写：
+        //当对象的key和value同名，并且value是变量的时候,可以直接简写
+        //对象中的方法都可以进行简写
+
+        const obj = {
+            name,
+            age,
+            score: 100,
+            sex,
+            eat() {
+                console.log("eat");
+            }
+        }
+
+        console.log(obj);
+    </script>
+</body>
+
+</html>

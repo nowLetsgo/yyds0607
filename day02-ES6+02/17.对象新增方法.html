@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Object新增的静态方法
+                - Object.is()
+                    - 判断两个对象是否相等（仍然判断的是地址），相当于===
+                    - 修复了全等 NaN和NaN不等的结果
+
+                - Object.assign()  
+                    - 合并多个对象
+        
+        */
+
+        console.log(NaN === NaN);
+        console.log(Object.is(NaN, NaN)); //true
+
+
+        const o1 = {
+            name: "laowang"
+        }
+        const o2 = {
+            age: 19
+        }
+        const o3 = {
+            sex: "nan"
+        }
+
+        const re = Object.assign({}, o1, o2, o3);
+        console.log(re);
+        console.log(re === o1); //true  把后边的对象全部合并到第一个对象中了
+    </script>
+</body>
+
+</html>

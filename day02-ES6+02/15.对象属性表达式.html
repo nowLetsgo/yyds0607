@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //对象的key一定是一个字符串，只不过在对象中可以省略引号
+        const obj = {
+            name: "laowang",
+            sex: "nan"
+        }
+
+        //目前有一个key被变量保存，怎么样设置到对象上呢
+        const key1 = "age";
+        obj[key1] = 18;
+        console.log(obj);
+
+
+        //目前有一个需求：在定义对象的时候，有一个key被变量保存了，此时需要把key设置给对象上
+        //我们就要使用属性表达式 直接在key的位置用中括号包起来即可解析变量
+        const key2 = "age";
+        const obj2 = {
+            name: "laowang",
+            [key2]: 18
+        }
+        console.log(obj2);
+    </script>
+</body>
+
+</html>

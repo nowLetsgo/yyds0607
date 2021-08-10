@@ -29,8 +29,12 @@
                         - 参数2：填充的开始位置
                         - 参数3：填充的结束位置（不包含）
                     - find() 和 findIndex()
+                        - find遍历数组，并找出数组中第一个符合条件的值，并返回出来
+                        - findIndex 找到第一个复合条件的值的下标
                     - includes()
+                        - 判断某个值是否存在在数组中，返回布尔值
                     - flat()
+                        - 展开数组，参数是展开的层数
         */
 
 
@@ -67,6 +71,51 @@
 
         const re3 = arr3.fill(0, 1, 3);
         console.log(re3)
+
+
+        //includes
+        const arr4 = [1, 2, 3, 4, 5];
+        const re4 = arr4.includes(3);
+        console.log(re4); //true
+
+        const arr5 = [1, 2, [3], 4, 5];
+        const re5 = arr5.includes([3]);
+        console.log(re5); //false
+
+        //flat
+        //返回了新数组
+        const arr6 = [1, [2, [3]], 4, 5];
+        const re6 = arr6.flat(Infinity);
+        console.log(re6, arr6);
+
+
+        //find和findIndex
+        const arr7 = [{
+            name: "laowang1",
+            age: 18
+        }, {
+            name: "laowang2",
+            age: 19
+        }, {
+            name: "laowang3",
+            age: 13
+        }, {
+            name: "laowang4",
+            age: 28
+        }, {
+            name: "laowang5",
+            age: 38
+        }];
+
+        //找出第一个未成年的人
+        const re7 = arr7.find((item, index) => {
+            return item.age < 18
+        })
+        console.log(re7);
+        const re8 = arr7.findIndex((item, index) => {
+            return item.age < 18
+        })
+        console.log(re8);
     </script>
 </body>
 
