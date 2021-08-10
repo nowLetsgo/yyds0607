@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            startsWith();判断开头有没有包含某个字符串
+            endsWith();判断结尾有没有包含某个字符串
+            includes判断字符串是否包含某个字符串
+
+            repeat重复当前的字符串，可以规定次数
+
+            padStart()当字符串不够某个长度的时候，在前边补充任意字符
+            padEnd()当字符串不够某个长度的时候，在后边补充任意字符
+        
+        */
+
+        const str = "hello world";
+
+        console.log(str.startsWith("he")); //true
+        console.log(str.endsWith("ld")); //true
+        console.log(str.includes("ll")); //true
+
+
+        const str2 = "海静哥哥";
+        console.log(str2.repeat(10))
+
+        const str3 = "海静哥哥";
+        console.log(str3.padStart(10, "&&##"));
+        console.log(str3.padEnd(10, "&&##"));
+    </script>
+</body>
+
+</html>

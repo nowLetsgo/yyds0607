@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            模板字符串：
+                - 模板字符串（template string）是增强版的字符串，用反引号（`）标识。可以嵌套变量，可以换行，可以包含单引号和双引号。
+                - 在模板字符串中使用${}嵌套变量
+                - 大括号内部可以放入任意的 JavaScript 表达式（不是语句 因为语句没有返回值），可以进行运算，以及引用对象属性
+        */
+
+
+        function myself(name, age, sex) {
+            /* const str = '我的名字是' + name + '，我的年龄是' + age + '，我的性别是' + sex + '，我成年了'; */
+
+            const str = `我的名字是${name}，
+                我的年龄是${age}，
+                我的性别是${sex}，
+                我${age>=18?"成年":"未成年"}了
+            `;
+            return str;
+        }
+
+        const re = myself("laowang", 18, '男');
+        console.log(re);
+    </script>
+</body>
+
+</html>

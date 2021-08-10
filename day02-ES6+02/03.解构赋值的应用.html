@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //拿到对象中的某些属性或方法
+        const {
+            log,
+            dir
+        } = console;
+
+        log(2)
+        dir(Array)
+
+
+        const obj = {
+            do: function () {
+                console.log("do");
+            },
+            eat: function () {
+                console.log("eat");
+            },
+            say: function () {
+                console.log("say");
+            },
+        }
+        const {
+            eat
+        } = obj;
+        eat();
+
+        //函数传参
+        const arr = [1, 2, 3];
+
+        function fn([a, b, c]) {
+            console.log(a, b, c);
+        }
+        fn(arr);
+    </script>
+</body>
+
+</html>

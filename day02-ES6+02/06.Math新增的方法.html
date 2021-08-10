@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*  
+            Math的扩展
+                Math.trunc()方法会将数字的小数部分去掉，只保留整数部分
+                Math.sign() 判断一个数字的正数还是负数 还是0 或者是NaN
+                Math.sqrt()平方根
+                Math.cbrt()立方根
+                Math.hypot() 求所有参数平方和的平方根
+
+
+            Number扩展
+                Number.isFinite(i) : 判断是否是有限大的数
+                Number.isNaN(i) : 判断是否是NaN
+                Number.isInteger(i) : 判断是否是整数
+                Number.parseInt(str) : 将字符串转换为对应的数值
+        */
+
+        console.log(Math.trunc(3.14)); //3
+        console.log(Math.sign(0)); //0
+        console.log(Math.sign(3)); //1
+        console.log(Math.sign(-3)); //-1
+        console.log(Math.sign(NaN)); //NaN
+        console.log(Math.sqrt(4)); //2
+        console.log(Math.cbrt(27)); //3
+        console.log(Math.hypot(3, 4)); //5
+
+
+        console.log(Number.isFinite(Infinity)); //false
+        console.log(Number.isFinite(3)); //true
+
+
+        console.log(isNaN("abc")); //true 先类型转换number 再判断
+        console.log(Number.isNaN("abc")); //true  不会类型转换直接判断
+        console.log(Number.isInteger(3.14)); //false
+        console.log(Number.isInteger(314)); //true
+    </script>
+</body>
+
+</html>
