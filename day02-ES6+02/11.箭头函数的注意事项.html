@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            箭头函数的注意事项
+                - 箭头函数没有自己的this
+                - 箭头函数不能用于构造函数，也就是不能使用new关键字调用
+                - 箭头函数没有arguments对象
+                - 箭头函数不能使用yield命令，意味着不能当作gennerator函数（后边会讲）
+        */
+
+        // 箭头函数没有自己的this
+        /* document.onclick = () => {
+            console.log(this); //window
+        } */
+
+        /* document.onclick = function () {
+            setTimeout(() => {
+                console.log(this); //document
+            }, 0)
+        } */
+
+
+        /* const obj = {
+            do: function () {
+                console.log(this); //obj
+
+                function fn() {
+                    console.log(this); //window
+                }
+                fn();
+            }
+        }
+        obj.do(); */
+
+
+
+        /* const obj = {
+            do: () => {
+                console.log(this); //window
+
+                function fn() {
+                    console.log(this); //window
+                }
+                fn();
+            }
+        }
+        obj.do(); */
+
+
+        /* const obj = {
+            do: function () {
+                console.log(this); //obj
+
+                const fn = () => {
+                    console.log(this); //obj
+                }
+                fn();
+            }
+        }
+        obj.do(); */
+
+
+        //箭头函数不能用于构造函数，也就是不能使用new关键字调用
+        /* const fn = () => {
+
+        };
+        const fn1 = new fn(); //TypeError: fn is not a constructor */
+
+
+        //箭头函数没有arguments对象
+        /* const fn = () => {
+            console.log(arguments); //ReferenceError: arguments is not defined
+        }
+        fn(1, 2, 3) */
+    </script>
+</body>
+
+</html>

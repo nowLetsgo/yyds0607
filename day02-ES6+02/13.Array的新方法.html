@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Array的新方法
+                - 静态方法
+                    Array.from()
+                    - 把伪数组转为数组
+
+                    Array.of()
+                    - 修补了new Array创建数组的时候传入1个参数，是代表长度的问题
+
+                - 原型对象上的新方法
+                    - copyWithin
+                        - 参数1：开始替换的位置
+                        - 参数2：开始选取的位置
+                        - 参数3：结束选取的位置（不包含）
+                    - fill
+                        - 参数1：填充的内容
+                        - 参数2：填充的开始位置
+                        - 参数3：填充的结束位置（不包含）
+                    - find() 和 findIndex()
+                    - includes()
+                    - flat()
+        */
+
+
+        // Array.from()
+        const likeArr = {
+            0: "a",
+            1: "b",
+            2: "c",
+            3: "d",
+            length: 4
+        }
+        console.log(Array.from(likeArr));
+
+        //Array.of()
+        const arr1 = new Array(4);
+        console.log(arr1);
+
+        const arr2 = Array.of(2);
+        console.log(arr2);
+
+
+
+        // copyWithin
+        //改变原数组 并返回原数组的引用
+        const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+        const re = arr.copyWithin(1, 5, 8);
+        console.log(re, arr); //[1, 6, 7, 8, 5, 6, 7, 8, 9, 0]
+
+        //fill
+        //改变原数组 并返回原数组的引用
+        const arr3 = new Array(7);
+        // const re3 = arr3.fill(0);
+        // console.log(re3, arr3);
+
+        const re3 = arr3.fill(0, 1, 3);
+        console.log(re3)
+    </script>
+</body>
+
+</html>
