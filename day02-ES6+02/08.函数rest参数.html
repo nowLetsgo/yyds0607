@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            函数的rest参数：
+                - 拿到参数中，剩余没有被形参接受的参数，用数组表示
+
+        
+        */
+        function fn(a, b, ...rest) {
+            console.log(a, b, rest);
+        }
+        fn(1, 2, 3, 4, 5, 6, 7, 8)
+
+
+        function fn2(a, ...rest) {
+            console.log(rest, arguments);
+        }
+        fn2(1, 2, 3, 4, 5)
+    </script>
+</body>
+
+</html>
