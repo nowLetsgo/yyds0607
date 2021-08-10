@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //用四个变量分别保存数组中的每一个值
+        /* const arr = [1, 2, 3, 4];
+        const a = arr[0];
+        const b = arr[1];
+        const c = arr[2];
+        const d = arr[3];
+        console.log(a, b, c, d); */
+
+
+        /* 
+            解构赋值：
+                - 按照一定模式，从数组和对象中提取值，对变量进行赋值，这被称为解构（Destructuring）
+                - 解构赋值 本质就是赋值，把结构解散重构 然后赋值 其实是一种模式的匹配，关键要掌握一一对应关系。
+
+            数组的解构赋值：
+                - 数组解构赋值可以从数组中提取值，按照对应位置，对变量赋值
+
+        */
+
+        //数组解构赋值可以从数组中提取值，按照对应位置，对变量赋值
+        {
+            const arr = [1, 2, 3, 4];
+            const [a, b, c, d] = arr;
+            console.log(a, b, c, d); //1 2 3 4
+        }
+
+
+        //解构失败返回undefined
+        {
+            const arr = [1, 2];
+            const [a, b, c] = arr;
+            console.log(a, b, c); //1 2 undefined
+        }
+
+        //不完全解构也可以成功
+        {
+            const arr = [1, 2];
+            const [a] = arr;
+            console.log(a); //1
+        }
+
+
+        //可以为解构赋值可以设置默认值
+        {
+            const arr = [1, 2];
+            const [a = 0, b = 0, c = 0] = arr;
+            console.log(a, b, c);
+        }
+
+
+        //可以使用rest参数（当值比变量多的时候）重点是...  用来整合没有拿完的值 然后组成一个数组放到变量中
+        //rest参数一定放在末尾
+        {
+            const arr = [1, 2, 3, 4, 5, 6, 7, 8];
+            const [a, b, c, ...rest] = arr;
+            console.log(a, b, c, rest);
+        }
+
+        //多维数组的解构赋值
+        {
+            const arr = [1, [2, 3]];
+            const [a, [b, c]] = arr;
+            console.log(a, b, c);
+        }
+
+
+        //练习：
+        const [foo = hoo, hoo = 2] = [];
+        console.log(foo, hoo)
+    </script>
+</body>
+
+</html>

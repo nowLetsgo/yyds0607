@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            对象的解构赋值：
+
+            对象的解构与数组有一个重要的不同。数组的元素是按次序排列的，变量的取值由它的位置决定；而对象的属性没有次序，变量必须与属性同名，才能取到正确的值
+        
+        */
+
+
+        const obj = {
+            a: 1,
+            b: 2
+        };
+
+        //对象的解构赋值
+        {
+            const {
+                a: a,
+                b: b
+            } = obj;
+
+            console.log(a, b);
+        }
+
+        //对象的简写：当key和value(是一个变量)相同的时候，可以直接书写key即可
+        {
+            const {
+                a,
+                b
+            } = obj;
+
+            console.log(a, b);
+        }
+
+
+        //对象解构赋值可以设置默认值
+        {
+            const {
+                a = 0,
+                    b = 0,
+                    c = 0,
+            } = obj;
+
+            console.log(a, b, c);
+        }
+
+        //对象和数组解构可以嵌套
+        {
+            const obj = {
+                a: [1, 2, 3],
+                b: 4
+            };
+            const {
+                a: [a1, a2, a3],
+                b
+            } = obj;
+            console.log(a1, a2, a3, b);
+        }
+    </script>
+</body>
+
+</html>

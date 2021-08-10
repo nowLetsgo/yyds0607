@@ -34,9 +34,12 @@
                 console.log(val);
 
                 //对用户设置的值进行操作 设置给对象
-                var valArr = val.split(" ");
-                this.firstName = valArr[0]
-                this.lastName = valArr[1]
+                var valArr = val.split(" "); //["lao","li"]
+                
+                [this.firstName, this.lastName] = valArr;
+
+                /* this.firstName = valArr[0]
+                this.lastName = valArr[1] */
             }
         });
 
