@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //数组的iterater接口
+        console.log(Array.prototype);
+
+        const arr = ["a", "b", "c", "d"];
+
+        //数组上部署有iterater接口，我们调用数组的iterater接口方法，可以得到一个对象
+        const arrIter = arr[Symbol.iterator]();
+        console.log(arrIter);
+        //iterater接口调用返回的对象上 有一个next方法
+        console.log(arrIter.next())
+        console.log(arrIter.next())
+        console.log(arrIter.next())
+        console.log(arrIter.next())
+        console.log(arrIter.next())
+        console.log(arrIter.next())
+
+
+
+        //字符串的iterator接口
+        const str = "123456";
+
+        console.log(String.prototype);
+
+        const strIter = str[Symbol.iterator]();
+        console.log(strIter);
+        console.log(strIter.next());
+        console.log(strIter.next());
+        console.log(strIter.next());
+        console.log(strIter.next());
+        console.log(strIter.next());
+        console.log(strIter.next());
+        console.log(strIter.next());
+        console.log(strIter.next());
+
+
+        //对象的iterator(对象没有部署iterator接口)
+        console.log(Object.prototype);
+        const o = {
+            name: "laowang",
+            age: "18"
+        }
+        // console.log(...o); //Found non-callable @@iterator 找不到可调用的迭代器
+
+
+        //set
+        console.log(Set.prototype)
+
+        const set1 = new Set([1, 2, 3, 4]);
+        console.log(...set1);
+
+
+        //map
+        console.log(Map.prototype);
+        const map1 = new Map([
+            ["name", "laowang"],
+            [true, "123"]
+        ])
+
+        console.log(...map1); //["name", "laowang"],[true, "123"]
+    </script>
+</body>
+
+</html>

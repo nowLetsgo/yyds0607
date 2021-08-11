@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Bigint类型：
+                - 如果是2的53次方，则js计算就不再精确，如果超过2的1024次方，则js会展示Infinity
+                - Bigint类型可以进行精确及大数的运算
+                - Bigint类型直接在number后添加一个n即可
+        
+        */
+
+        console.log(2 ** 53);
+        console.log(2 ** 53 + 1);
+        console.log(2 ** 53 + 2);
+        console.log(2 ** 53 + 3);
+        console.log(2 ** 53 + 4);
+        console.log(2 ** 53 + 6);
+        console.log(2 ** 53 + 7);
+        console.log(2 ** 53 + 8);
+        console.log(2 ** 1023);
+        console.log(2 ** 1024);
+
+
+        const big1 = 1n;
+        console.log(big1);
+        console.log(typeof big1);
+        console.log(Object.prototype.toString.call(big1)); //[object BigInt]
+
+
+        //bigInt计算
+        // console.log(1n + 1); //Cannot mix BigInt and other types, use explicit conversions
+
+        console.log(1n + 1n);
+        console.log(2n ** 53n + 1n);
+        console.log(2n ** 53n + 2n);
+        console.log(2n ** 53n + 3n);
+        console.log(2n ** 53n + 4n);
+        console.log(2n ** 1024n);
+        console.log(2n ** 10024n);
+        console.log(2n ** 100024n);
+
+
+        //类型转换
+        console.log(Number(1n)); //能使用Number转类型 不能使用一元+
+        console.log(parseInt(1n)); //能使用ParseInt转类型 不能使用一元+
+        console.log(String(1n)); //1
+
+
+        console.log(1n == 1); //true
+
+
+        console.log(BigInt(1)); //把Number转成bigint
+    </script>
+</body>
+
+</html>
