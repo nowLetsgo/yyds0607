@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        Function.prototype.myCall = function (obj, ...rest) {
+
+            if (obj === null || obj === undefined) {
+                obj = window;
+            }
+            if (typeof obj !== 'object' && typeof obj !== "function") {
+                obj = Object(obj);
+            }
+
+            //得到一个独一无二的值
+            var sy1 = Symbol("sy1");
+            obj[sy1] = this;
+
+            //调用obj[sy1]得到结果
+            const re = obj[sy1](...rest)
+
+            //obj.f是为了效果而设置的，当使用完毕之后 要销毁f属性 否则将改变对象内容
+            delete obj[sy1];
+
+            //myCall应该返回fn函数的返回值
+            return re;
+        }
+
+
+        //使用测试
+        var o = {
+            name: "laowang"
+        }
+
+        function fn(a, b) {
+            console.log(this, a + b);
+            return "hello";
+        }
+
+        var re = fn.myCall(o, 1, 2);
+        console.log(re);
+        fn.myCall(1, 1, 2);
+        fn.myCall("1", 1, 2);
+        fn.myCall(null, 1, 2);
+        fn.myCall(undefined, 1, 2);
+        fn.myCall(/\s/, 1, 2);
+        fn.myCall([], 1, 2);
+        fn.myCall(function () {}, 1, 2);
+    </script>
+</body>
+
+</html>

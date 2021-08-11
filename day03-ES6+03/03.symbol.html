@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Symbol:
+                - 用来创建独一无二的值，是 JavaScript 语言的第七种数据类型，属于基本类型
+                - Symbol 值通过Symbol函数生成
+
+                特征：
+                    - Symbol中传入的字符串没有任何意义，只是用来描述Symbol的
+                    - Symbol不能使用New调用
+                    - 类型转换的时候，不能转数字
+                    - for in 不能遍历出来Symbol
+                    - 可以使用Object.getOwnPropertySymbols方法来拿
+        
+        */
+
+        //创建一个symbol,symbol函数的参数没有实际意义
+        const sy1 = Symbol("sy1");
+        const sy2 = Symbol("sy2");
+        console.log(sy1, sy2);
+
+        //判断Symbol的类型
+        console.log(typeof sy1); //symbol
+        console.log(Object.prototype.toString.call(sy1)) //[object Symbol]
+
+        //判断两个symbol值是否相等
+        console.log(sy1 === sy2); //Symbol值是不可能相等的
+        console.log(String(sy1) === String(sy1)); //true
+        console.log(sy1.toString() === sy1.toString()); //true
+
+
+        //应用：给对象扩展独一无二的值
+        const obj = {
+            name: "laowang",
+            age: 18,
+            eat() {
+                console.log("eat");
+            }
+        }
+
+        //给obj扩展一个独一无二的属性
+        //如果扩展的时候，Symbol没有用变量保存，则以后很难再去获取到了
+        obj[Symbol(1)] = "hello";
+
+        //Symbol的描述 一般书写为保存这个Symbol的变量名
+        const sy3 = Symbol('sy3');
+        obj[sy3] = "world";
+        console.log(obj);
+
+        //想要获取到hello这个值
+        console.log(obj[Symbol(1)]);
+        console.log(obj[sy3]);
+
+
+        //Symbol不能被遍历出来
+        for (let key in obj) {
+            console.log(key);
+        }
+
+        //getOwnPropertySymbols 拿到对象的Symbol属性
+        const re = Object.getOwnPropertySymbols(obj)
+        console.log(re); //返回一个数组，保存Symbol属性的key
+        console.log(obj[re[0]]);
+        console.log(obj[re[1]]);
+
+
+        // console.log(Boolean(Symbol()));
+    </script>
+</body>
+
+</html>

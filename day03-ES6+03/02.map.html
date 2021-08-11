@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Map:
+                - ES提供了Map构造函数，可以实例化得到map对象
+
+            方法：
+                size属性返回 Map 结构的成员总数。
+                set方法设置键名key对应的键值为value，然后返回整个 Map 结构。如果key已经有值，则键值会被更新，否则就新生成该键。set方法返回的是当前的Map对象，因此可以采用链式写法。
+                get方法读取key对应的键值，如果找不到key，返回undefined。
+                has方法返回一个布尔值，表示某个键是否在当前 Map 对象之中。
+                delete方法删除某个键，返回true。如果删除失败，返回false。
+                clear方法清除所有成员，没有返回值。
+                keys()：返回键名的遍历器。
+                values()：返回键值的遍历器。
+                entries()：返回所有成员的遍历器。
+                forEach()：遍历 Map 的所有成员。
+
+        */
+        const arr = [1, 2, 3]
+        const map1 = new Map([
+            ["name", "laowang"],
+            ["age", 18],
+            [true, "hello"],
+            [123, "456"],
+            [arr, "456"],
+            [{
+                name: "laowang"
+            }, function () {}]
+        ]);
+        console.log(map1);
+
+        //size
+        console.log(map1.size);
+
+        //set:改变了原map 返回原map的引用
+        const re1 = map1.set(223, "334")
+        console.log(map1, re1);
+
+        //get
+        const re2 = map1.get(true);
+        console.log(re2);
+
+        //has 判断某一个key是否在map中
+        const re3 = map1.has(arr)
+        console.log(re3);
+
+        //delete
+        const re4 = map1.delete(123);
+        console.log(re4);
+
+        //forEach
+        map1.forEach((item, index) => {
+            console.log(item, index);
+        })
+
+        //clear
+        map1.clear();
+        console.log(map1);
+
+
+
+        //面试题：obj的key一定是一个字符串
+        /* const o1 = {
+            n: 1
+        }
+        const o2 = {
+            m: 2
+        }
+        const o3 = {};
+        const o4 = {};
+
+        o3[o1] = 1;
+        o3[o2] = 2;
+
+        console.log(o3[o4]); */
+    </script>
+</body>
+
+</html>
