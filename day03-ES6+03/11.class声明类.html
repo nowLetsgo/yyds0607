@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //ES5定义一个类
+        /* function Person(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        Person.prototype.eat = function () {
+            console.log("eat");
+        }
+        //静态方法
+        Person.do = function () {
+            console.log("do");
+        } */
+
+
+        //ES6提供了一个语法糖定义类
+        class Person {
+            //constructor方法是类的默认方法，通过new命令生成对象实例时，自动调用该方法。一个类必须有constructor方法，如果没有显式定义，一个空的constructor方法会被默认添加。
+            constructor(name, age, sex) {
+                this.age = age;
+                this.name = name;
+                this.sex = sex;
+            }
+
+            //添加原型对象上的方法
+            eat() {
+                console.log("eat");
+            }
+
+            //给当前的类添加静态方法
+            static do() {
+                console.log("do");
+            }
+        }
+
+        //直接也可以通过原型对象扩展
+        Person.prototype.hello = function () {
+            console.log("world");
+        }
+
+
+        const p1 = new Person("laowang", 18, "男");
+        console.log(p1);
+        console.log(p1.constructor === Person);
+        console.log(Person.prototype);
+        //调用静态方法
+        console.log(Person.do)
+    </script>
+</body>
+
+</html>
