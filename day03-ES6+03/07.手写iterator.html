@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const arr = ["a", "b", "c", "d"];
+
+        Array.prototype.myIterator = function () {
+            const _this = this;
+            //当调用myIterator的时候，返回一个对象，这个对象拥有next next方法依次得到数组的值
+            let index = 0; //初始化一个读取数组的下标
+            return {
+                next() {
+                    /* if (index <= _this.length - 1) {
+                        return {
+                            value: _this[index++],
+                            done: false
+                        }
+                    } else {
+                        return {
+                            value: undefined,
+                            done: true
+                        }
+                    } */
+
+                    return {
+                        value: _this[index++],
+                        done: index <= _this.length ? false : true
+                    }
+
+                }
+            }
+        }
+
+        const re = arr.myIterator();
+        console.log(re.next()); //{value:"a",done:false}
+        console.log(re.next()); //{value:"b",done:false}
+        console.log(re.next()); //{value:"c",done:false}
+        console.log(re.next()); //{value:"d",done:false}
+        console.log(re.next()); //{value:undefined,done:true}
+    </script>
+</body>
+
+</html>

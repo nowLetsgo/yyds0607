@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            generator:
+                - Generator 函数是 ES6 提供的一种异步编程解决方案，内部封装了很多的状态，被称作状态机 生成器
+                - 执行Generator会返回一个迭代器对象（iterator），使用iterator来遍历出Generator内部的状态
+                - 形式上，Generator 函数是一个普通函数，但是有两个特征。一是，function关键字与函数名之间有一个星号；二是，函数体内部使用yield表达式，定义不同的内部状态（yield在英语里的意思就是“产出”）
+        */
+
+
+        function* getData() {
+            //在generator函数中 使用yield来定义状态
+            yield setTimeout(() => {
+                console.log("a已经获取到了");
+                //当前状态执行完成以后，调用下个状态
+                re.next();
+            }, 2000);
+
+            yield setTimeout(() => {
+                console.log("b已经获取到了");
+                re.next();
+            }, 1000);
+
+            yield setTimeout(() => {
+                console.log("c已经获取到了");
+            }, 1500);
+        }
+
+        //返回的对象拥有next方法，每次调用next方法就可以执行一个状态
+        const re = getData();
+        console.log(re);
+        //调用状态机的第一个状态
+        // re.next()
+    </script>
+</body>
+
+</html>

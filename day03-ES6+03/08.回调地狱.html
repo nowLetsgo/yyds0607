@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            先请求a数据，然后再请求b数据，再请求c数据
+        */
+
+        //回调地狱写法
+        setTimeout(() => {
+            console.log("a数据请求成功");
+
+            //当a请求完成后 请求b数据
+            setTimeout(() => {
+                console.log("b数据请求成功");
+
+                //当b数据请求完成后，请求c数据
+                setTimeout(() => {
+                    console.log("c数据请求成功");
+                }, 1500)
+            }, 2000)
+        }, 1000)
+
+
+        //我们希望写成如下的格式
+        /* setTimeout(() => {
+            console.log("a数据请求成功");
+        }, 1500)
+        setTimeout(() => {
+            console.log("b数据请求成功");
+        }, 1500)
+        setTimeout(() => {
+            console.log("c数据请求成功");
+        }, 1500) */
+    </script>
+</body>
+
+</html>
