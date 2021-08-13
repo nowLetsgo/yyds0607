@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            promise的then方法
+                - then方法在Promise的原型对象上，当调用then的promise对象改变状态为fulfiled/rejected的时候，会自动调用then方法
+                - then方法默认有两个参数，一般来说这两个参数都是回调函数，第一个参数处理promise的成功状态（可以传递一个形参，这个形参就是成功状态promise对象的值），第二个参数处理promise的失败状态(可以传递一个形参，这个形参就是失败的promise对象的值)
+        */
+
+        const p1 = new Promise((resolve, reject) => {
+            console.log("开始请求a。。。。");
+
+            setTimeout(() => {
+                try {
+                    //模拟抛出错误（后边代码不再执行直接进入catch）
+                    throw new Error("a数据请求失败")
+
+                    //a请求成功
+                    console.log("a数据请求成功");
+                    //模拟请求回来的a数据
+                    const dataA = [1, 2, 3, 4];
+                    //调用成功回调
+                    resolve(dataA);
+                } catch (e) {
+                    console.log(e);
+                    //错误处理
+                    reject(e);
+                }
+            }, 1000)
+
+        })
+
+        console.log(p1);
+
+        //调用then方法
+        p1.then((value) => {
+            console.log("value", value);
+            console.log("调用我的是成功状态的promise对象");
+        }, (reason) => {
+            console.log("reason", reason);
+            console.log("调用我的是失败状态的promise对象");
+        })
+    </script>
+</body>
+
+</html>
