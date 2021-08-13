@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const p1 = new Promise((resolve, reject) => {
+            console.log("开始请求a。。。。");
+
+            setTimeout(() => {
+                try {
+                    //模拟抛出错误（后边代码不再执行直接进入catch）
+                    throw new Error("a数据请求失败")
+
+                    //a请求成功
+                    console.log("a数据请求成功");
+                    //模拟请求回来的a数据
+                    const dataA = [1, 2, 3, 4];
+                    //调用成功回调
+                    resolve(dataA);
+                } catch (e) {
+                    console.log(e);
+                    //错误处理
+                    reject(e);
+                }
+            }, 1000)
+
+        })
+
+
+        //如果then中没有处理失败，则失败promise对象调用then的返回值，是一个失败的promise对象，值还是调用then的那个promise对象的值
+        /* const re = p1.then((value) => {
+            console.log(value);
+        })
+
+        console.log(re); */
+
+
+        //如果失败的promise调用then，并且then处理失败了，则then的返回值参考catch的返回值规则
+        const re = p1.then((value) => {
+            console.log(value);
+        }, (reason) => {
+            console.log(reason);
+            return new Promise((resolve, reject) => {
+                // reject();
+            })
+        })
+
+
+
+        console.log(re);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            promise的catch方法
+                - catch方法在Promise的原型对象上，当调用catch的promise对象改变状态为rejected的时候，会自动调用catch方法
+                - catch方法默认有一个参数，这个参数处理promise的失败状态(可以传递一个形参，这个形参就是失败的promise对象的值)
+
+
+            catch的返回值：
+                - 当成功的promise对象调用catch,直接返回成功的promise对象，promise对象的值，也是调用catch的promise对象的值
+
+                - 当失败的promise调用catch
+                    - catch中是一个回调函数，回调函数返回一个值，则catch返回一个成功的promise对象，值为回调函数返回的值
+                    - catch中是一个回调函数，回调函数没有返回值，则catch返回一个成功的promise对象，值为undefined
+
+                    - catch中是一个回调函数，回调函数返回一个成功的promise对象，则catch返回一个成功的promise对象，值为回调函数返回的promise对象的值
+                    - catch中是一个回调函数，回调函数返回一个失败的promise对象，则catch返回一个失败的promise对象，值为回调函数返回的promise对象的值
+                    - catch中是一个回调函数，回调函数返回一个未定义状态的promise对象，则catch返回一个未定义状态的promise对象，值为undefined
+
+                    - then中不传递回调函数，则会发生值穿透
+
+        */
+
+        const p1 = new Promise((resolve, reject) => {
+            console.log("开始请求a。。。。");
+
+            setTimeout(() => {
+                try {
+                    //模拟抛出错误（后边代码不再执行直接进入catch）
+                    throw new Error("a数据请求失败")
+
+                    //a请求成功
+                    console.log("a数据请求成功");
+                    //模拟请求回来的a数据
+                    const dataA = [1, 2, 3, 4];
+                    //调用成功回调
+                    resolve(dataA);
+                } catch (e) {
+                    console.log(e);
+                    //错误处理
+                    reject(e);
+                }
+            }, 1000)
+
+        })
+
+        console.log(p1);
+
+        /* p1.catch((reason) => {
+            console.log("promise失败了，失败的信息是", reason);
+        }) */
+
+
+        // 当成功的promise对象调用catch
+        /*  const re = p1.catch((reason) => {
+             throw new Error("error")
+             console.log("promise失败了，失败的信息是", reason);
+         })
+         console.log(re); */
+
+        /* const re = p1.catch((reason) => {
+            return 1
+        })
+        console.log(re); */
+
+        /* const re = p1.catch((reason) => {
+
+        })
+        console.log(re); */
+
+
+        /* const re = p1.catch((reason) => {
+            return new Promise((resolve, reject) => {
+                resolve("成功")
+            })
+        })
+        console.log("catch返回值re", re); */
+
+
+        /* const re = p1.catch((reason) => {
+            return new Promise((resolve, reject) => {
+                reject("失败")
+            })
+        })
+        console.log("catch返回值re", re); */
+
+        /* const re = p1.catch((reason) => {
+            return new Promise((resolve, reject) => {
+
+            })
+        })
+        console.log("catch返回值re", re); */
+    </script>
+</body>
+
+</html>
