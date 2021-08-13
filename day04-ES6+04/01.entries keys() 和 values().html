@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            entries()：获取键值对的迭代器对象
+            keys():获取键的迭代器对象
+            values():获取值的迭代器对象
+        */
+
+        //array操作
+        const arr = ["a", "b", "c", "d"];
+        const arrEn = arr.entries();
+        const arrKe = arr.keys();
+        const arrVal = arr.values();
+
+        console.log("arrEn", arrEn);
+        // console.log("arrEn", arrEn.next());
+        // console.log("arrEn", arrEn.next());
+        // console.log("arrEn", arrEn.next());
+        console.log("arrEn", ...arrEn);
+
+        console.log("arrKe", arrKe);
+        console.log("arrKe", ...arrKe);
+
+        console.log("arrVal", arrVal);
+        console.log("arrVal", ...arrVal);
+
+
+
+        //set
+        const set1 = new Set(["a", "b", "c"])
+        const setEn = set1.entries();
+        const setVal = set1.values();
+        const setKe = set1.keys();
+
+        console.log("setEn", ...setEn); //set类型的key和value是同一个东西
+        console.log("setVal", ...setVal);
+        console.log("setKe", ...setKe);
+
+
+        //map 
+        const map = new Map([
+            ["name", "laowang"],
+            ["age", 19],
+            ["sex", "nan"]
+        ])
+        const mapEn = map.entries();
+        const mapVal = map.values();
+        const mapKe = map.keys();
+
+        console.log("mapEn", ...mapEn);
+        console.log("mapVal", ...mapVal);
+        console.log("mapKe", ...mapKe);
+
+
+        //obj
+        const obj = {
+            name: "laowang",
+            age: 18,
+            sex: "nan"
+        }
+        /* for (let key in obj) {
+            console.log(key); //name age sex
+            console.log(obj[key]); //laowang 18 nan
+        } */
+        const objEn = Object.entries(obj);
+        const objVal = Object.values(obj);
+        const objKe = Object.keys(obj);
+        console.log("objEn", ...objEn);
+        console.log("objVal", ...objVal);
+        console.log("objKe", ...objKe);
+
+        //遍历对象得到对象的值：
+        for (let value of Object.values(obj)) {
+            console.log("value", value);
+        }
+    </script>
+</body>
+
+</html>

@@ -61,9 +61,13 @@
 
         //forEach
         map1.forEach((item, index) => {
-            console.log(item, index);
+            console.log("map遍历", item, index);
         })
 
+        //for of 
+        for (let value of map1) {
+            console.log("of遍历的value", value)
+        }
         //clear
         map1.clear();
         console.log(map1);
