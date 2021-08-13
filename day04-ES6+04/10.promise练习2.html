@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            先请求A数据，然后再请求B数据，然后再请求C数据
+        
+        */
+
+        const p1 = new Promise((resolve, reject) => {
+            console.log("请求A数据中。。。。");
+            setTimeout(() => {
+                try {
+                    console.log("A数据请求成功");
+                    //模拟数据
+                    const dataA = {
+                        name: "laowang"
+                    };
+                    //调用成功函数
+                    resolve(dataA);
+                } catch (e) {
+                    console.log("A数据请求失败");
+                    reject(e);
+                }
+            }, 2000)
+        })
+
+        console.log(p1);
+
+        const p2 = p1.then((value) => {
+            console.log("B数据请求中。。。。");
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    try {
+                        console.log("B数据请求成功");
+                        //模拟数据
+                        const dataB = {
+                            age: 18
+                        };
+                        //调用成功函数
+                        resolve(Object.assign({}, value, dataB));
+                    } catch (e) {
+                        console.log("B数据请求失败");
+                        reject(e);
+                    }
+                }, 1500)
+            })
+        })
+
+        const p3 = p2.then((value) => {
+            console.log("C数据请求中。。。。");
+            return new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    try {
+                        console.log("C数据请求成功");
+                        //模拟数据
+                        const dataC = {
+                            sex: "nan"
+                        };
+                        //调用成功函数
+                        resolve(Object.assign({}, value, dataC));
+                    } catch (e) {
+                        console.log("C数据请求失败");
+                        reject(e);
+                    }
+                }, 1500)
+            })
+        })
+
+        p3.then((value) => {
+            console.log("A B C全部请求成功");
+            console.log("最终的值", value);
+        })
+    </script>
+</body>
+
+</html>
