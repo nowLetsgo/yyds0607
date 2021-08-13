@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Promise:
+                - 什么是Promise
+                    - 回调函数嵌套回调函数被称作回调地狱，代码层层嵌套，环环相扣，很明显，逻辑稍微复杂一些，这样的程序就会变得难以维护。代码臃肿，可读性差，耦合度过高。
+                    - Promise的标准化，一定程度上解决了JavaScript的流程操作问题。Promise对象时一个异步编程的解决方案，可以将异步操作以同步的流程表达出来, 避免了层层嵌套的回调函数(俗称'回调地狱')
+
+                - Promise的方法
+                    - 原型对象上的方法有 then catch finally
+                    - 静态方法有 all allSettled  any race reject resolve
+
+                - Promise的使用
+                    - 实例化Promise可以得到一个Promise的实例化对象，然后根据promise实例化对象的状态可以得知promise内部异步代码的状态
+                    - Promise实例化的时候，需要传递一个回调函数,把异步代码写在回调函数中
+                    - Promise实例化时传入的回调函数，接受两个参数，一个是resolve函数，一个是reject函数
+                    - 当promise内的异步代码处理成功，则我们调用resolve函数告知promise对象执行成功，当promise内的异步代码处理失败，则我们调用reject函数告知promise对象执行失败
+                    - Promise对象的状态只能改变一次，所以多次调用resolve和reject 只有第一个生效，resolve和reject能是改变promise实例化对象的状态，并不能停止代码的运行
+                    - 当调用resolve或reject的时候，如果传入的参数，则这个参数就是promise实例化对象的值
+
+        
+        */
+
+        console.log(Promise);
+        //查看Promise原型对象上的方法
+        console.log(Promise.prototype);
+        //查看Promise的静态方法
+        console.dir(Promise);
+
+
+        //Promise的使用（把异步代码交给Promise处理）
+        //Promise是处理异步的，但是自身的执行是同步的
+        const p1 = new Promise((resolve, reject) => {
+            // console.log("rest参数", rest); //回调函数调用的时候，会自动传入两个参数，是两个函数
+            console.log("开始请求a数据......."); //同步代码
+            setTimeout(() => {
+                console.log("a数据请求成功");
+                // reject('error:你错了没');
+                resolve({
+                    a: 1
+                });
+                console.log("哈哈哈啊哈 我上边改变状态了");
+            }, 2000)
+        });
+        console.log("p1", p1);
+    </script>
+</body>
+
+</html>
