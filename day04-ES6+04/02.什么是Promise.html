@@ -27,6 +27,15 @@
                     - 当promise内的异步代码处理成功，则我们调用resolve函数告知promise对象执行成功，当promise内的异步代码处理失败，则我们调用reject函数告知promise对象执行失败
                     - Promise对象的状态只能改变一次，所以多次调用resolve和reject 只有第一个生效，resolve和reject能是改变promise实例化对象的状态，并不能停止代码的运行
                     - 当调用resolve或reject的时候，如果传入的参数，则这个参数就是promise实例化对象的值
+                
+                - 实例化的promise对象
+                    - PromiseState属性：代表promise的状态
+                        - pending:异步代码正在执行中，还没有成功或者失败的结果
+                        - fulfilled/resolved:promise处理的异步代码执行成功，得到一个成功状态
+                        - rejected:promise处理的异步代码执行失败，得到一个失败的状态
+                    - PromiseResult：代表promise的执行结果
+                        - 当我们调用resolve或reject函数的时候，可以在参数中传递一个当前成功或者失败的结果
+                        - 如果没有向resolve或reject传递结果，或者没有调用resolve和reject，则这个值是undefined
 
         
         */
