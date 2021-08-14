@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            async和await：
+                - async 用于申明一个 function 是异步的，而 await 用于等待一个异步方法执行完成
+                - async函数(源自ES2017 - ES8),真正意义上去解决异步回调的问题，同步流程表达异步操作,是 Generator的语法糖
+
+            async函数返回值：
+                - 如果函数内return的不是promise对象，则async函数的返回值是一个成功状态的promise对象，值为return的值
+                - 如果函数内return的是一个promise对象，则async函数的返回值就是return的这个promise对象
+                - 如果函数内部报错，则async函数返回值就是一个失败的promise对象，值为报错信息
+                - 如果async函数中的await等待的promise对象失败，则直接退出async函数，并且async函数直接返回这个失败的promise对象
+
+            await等待：
+                await只能等待promise对象，当promise对象状态改变的时候，会继续向下执行
+                await语句 返回等待的promise对象成功状态的值
+        
+        */
+
+        /* async function getData() {
+            console.log(1);
+            throw new Error("1111")
+            return 1;
+            return new Promise((resolve, reject) => {
+                reject("hello");
+            })
+        }
+
+        const re = getData();
+        console.log(re); */
+
+
+
+
+        async function getData() {
+            console.log(1);
+
+            const a1 = await new Promise((resolve, reject) => {
+                setTimeout(() => {
+                    console.log(2);
+                    // resolve("ok")
+                    reject("no ok")
+                }, 2000)
+            })
+
+            console.log(a1);
+
+            console.log(3);
+
+            return 1
+        }
+
+        const re = getData();
+        console.log(re);
+    </script>
+</body>
+
+</html>
