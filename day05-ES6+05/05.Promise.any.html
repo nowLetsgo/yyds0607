@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Promise.any:
+                - 返回一个promise对象
+                - 只要迭代器中的promise对象有一个返回成功，则any就返回成功的promise对象
+                - 如果都没有成功则返回失败的promise对象，错误信息是AggregateError
+
+        
+        */
+
+        const p1 = new Promise((resolve, reject) => {
+            console.log("开始请求A数据");
+            setTimeout(() => {
+                try {
+                    throw new Error("请求A出错")
+                    console.log("A数据请求成功");
+                    resolve("A");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 2000)
+        })
+        const p2 = new Promise((resolve, reject) => {
+            console.log("开始请求B数据");
+            setTimeout(() => {
+                try {
+                    throw new Error("请求B出错")
+                    console.log("B数据请求成功");
+                    resolve("B");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 1000)
+        })
+        const p3 = new Promise((resolve, reject) => {
+            console.log("开始请求C数据");
+            setTimeout(() => {
+                try {
+                    throw new Error("请求C出错")
+                    console.log("C数据请求成功");
+                    resolve("C");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 1500)
+        })
+
+        const re = Promise.any([p1, p2, p3]);
+        console.log(re);
+
+        re.then(value => {
+                console.log("其中最先成功的是", value);
+            })
+            .catch(reason => {
+                console.log("没有一个成功的", reason);
+            })
+    </script>
+</body>
+
+</html>

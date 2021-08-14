@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Promise.all():
+                - Promise对象的静态方法
+                - 接收一个iterable类型的输入，iterable类型中需要放入多个promise对象
+                - Promise.all方法可以将多个promise的实例包装成一个新的Promise实例
+                - 当all中所有的promise实例都成功的时候，all返回成功状态的promise对象，值为所有传入实例的结果数组
+                - 如果所有的实例中，有一个失败了，则all直接失败的promise对象，值为失败的值
+        
+        
+        */
+
+        // 我想同时请求A B C，当全部请求完成之后，通知我
+
+        const p1 = new Promise((resolve, reject) => {
+            console.log("开始请求A数据");
+            setTimeout(() => {
+                try {
+                    // throw new Error("请求A出错")
+                    console.log("A数据请求成功");
+                    resolve("A");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 2000)
+        })
+        const p2 = new Promise((resolve, reject) => {
+            console.log("开始请求B数据");
+            setTimeout(() => {
+                try {
+                    // throw new Error("请求B出错")
+                    console.log("B数据请求成功");
+                    resolve("B");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 1000)
+        })
+        const p3 = new Promise((resolve, reject) => {
+            console.log("开始请求C数据");
+            setTimeout(() => {
+                try {
+                    // throw new Error("请求C出错")
+                    console.log("C数据请求成功");
+                    resolve("C");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 1500)
+        })
+
+        const re = Promise.all([p1, p2, p3]);
+        console.log(re);
+
+        //可以根据Promise.all的返回值 来进行下一步操作
+        re.then(value => {
+            console.log("ABC全部请求成功", value);
+        }).catch(reason => {
+            console.log("ABC其中有请求失败的", reason);
+        })
+    </script>
+</body>
+
+</html>

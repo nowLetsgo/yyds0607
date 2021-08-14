@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            Promise.race:
+                - 返回一个promise对象，一旦迭代器中某个promise实例成功或者失败，则race直接返回成功或者失败，值为第一个先得到结果的实例的值
+
+        
+        */
+
+        const p1 = new Promise((resolve, reject) => {
+            console.log("开始请求A数据");
+            setTimeout(() => {
+                try {
+                    // throw new Error("请求A出错")
+                    console.log("A数据请求成功");
+                    resolve("A");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 2000)
+        })
+        const p2 = new Promise((resolve, reject) => {
+            console.log("开始请求B数据");
+            setTimeout(() => {
+                try {
+                    throw new Error("请求B出错")
+                    console.log("B数据请求成功");
+                    resolve("B");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 1000)
+        })
+        const p3 = new Promise((resolve, reject) => {
+            console.log("开始请求C数据");
+            setTimeout(() => {
+                try {
+                    // throw new Error("请求C出错")
+                    console.log("C数据请求成功");
+                    resolve("C");
+                } catch (e) {
+                    console.log(e);
+                    reject(e)
+                }
+
+            }, 1500)
+        })
+
+        const re = Promise.race([p1, p2, p3]);
+        console.log(re);
+
+        re.then(value => {
+                console.log("值已经请求回来了", value);
+            })
+            .catch(reason => {
+                console.log("最先响应的是失败的，失败的内容是", reason);
+            })
+    </script>
+</body>
+
+</html>
