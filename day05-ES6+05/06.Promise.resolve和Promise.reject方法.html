@@ -21,7 +21,7 @@
             Promise.reject();
                 - 直接得到一个promise对象的失败实例
                 - 失败的promise的实例的值就是reject的参数
-                - 如果reject中传递的是一个promise对象的实例，则reject方法直接返回这个对象的实例
+                - 如果reject中传递的是一个promise对象的实例，则reject方法仍然返回的是失败的promise对象，值为reject中promise对象
         
         */
 
@@ -39,9 +39,9 @@
         const re3 = Promise.reject(3);
         console.log(re3);
 
-        const re4 = Promise.resolve(new Promise((resolve, reject) => {
-            // resolve("hello");
-            reject("gun")
+        const re4 = Promise.reject(new Promise((resolve, reject) => {
+            resolve("hello");
+            // reject("gun")
         }));
         console.log(re4);
     </script>

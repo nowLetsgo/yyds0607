@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /* 
+            .then或者.catch的参数期望是函数，传入的非函数则会发生值的穿透
+        
+        */
+
+        //案例1
+        const p1 = Promise.resolve(1);
+        const re = p1.then(2); //re确实是then的返回值，返回一个成功的promise对象，因为then中没有书写函数，所以出现了值的穿透,then返回的成功的promise对象的值仍然是p1的值
+        console.log(re === p1); //false
+
+
+        //案例2
+        Promise.resolve(1)
+            .then(2)
+            .then(Promise.resolve(3))
+            .then(console.log) //1
+
+
+        Promise.resolve("foo")
+            .then(Promise.resolve("hoo"))
+            .then((value) => {
+                console.log(value); //foo
+            })
+
+
+        Promise.resolve(1)
+            .then(() => {
+                return 2
+            })
+            .then(Promise.resolve(3))
+            .then(console.log) //2
+
+
+        Promise.resolve(1)
+            .then(() => {
+                return 2
+            })
+            .then(() => {
+                return Promise.resolve(3)
+            })
+            .then(console.log) //3
+
+
+
+        new Promise((resolve, reject) => {
+                reject(1)
+            })
+            .then(value => {
+                console.log('成功', value);
+            }, reason => {
+                console.log('失败', reason); //失败1
+            })
+            .then(value => {
+                console.log('成功', value); //成功 undefined
+            }, reason => {
+                console.log('失败', reason);
+            })
+            .catch(reason => console.log('失败', reason)) //不会执行
+    </script>
+</body>
+
+</html>
