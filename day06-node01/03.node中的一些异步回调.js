@@ -11,7 +11,7 @@ queueMicrotask(() => {
 //延迟调用定时器
 setTimeout(() => {
     console.log("setTimeout");
-}, 30)
+}, 0)
 
 //立即执行函数
 process.nextTick(() => {

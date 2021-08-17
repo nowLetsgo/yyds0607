@@ -1,6 +1,10 @@
 function add(a, b) {
     return a + b;
 }
+
+function mins(a, b) {
+    return a - b;
+}
 console.log(module);
 /* 
     module对象上有一个exports属性指向的是一个对象,这个对象就是暴露出去的对象
@@ -8,19 +12,26 @@ console.log(module);
 
 */
 
-//1.想要把add方法暴露出去
+//1.想要把add方法暴露出去（可以暴露多个）
 // module.exports.add = add;
 //以上暴露 想要在其他模块中引入add的方式如下
 // const { add } = require("./add")//这样就可以直接拿到add的方法
 
 
-//2.把add暴露出去
+//2.把add暴露出去(只能暴露一个)
 // module.exports = add;
 //以上暴露的引入方式
 // const add = require("./add");
 
 
-//3.使用exports暴露
+//3.
+module.exports = {
+    add,
+    mins
+}
+
+
+//4.使用exports暴露(以下是唯一一个使用exports暴露的方法)
 // exports.add = add;
 //以上暴露引入方式
 // const {add} = require("./add")

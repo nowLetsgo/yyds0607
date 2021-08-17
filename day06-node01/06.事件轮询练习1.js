@@ -25,6 +25,25 @@ promise.then(() => {
 setImmediate(() => {
     console.log(666);
 }); */
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+console.log(1);
+setImmediate(() => {
+    console.log(666);
+});
+setTimeout(() => {
+    console.log(333);
+}, 0);
 
 
 //练习2
