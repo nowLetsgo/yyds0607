@@ -7,6 +7,7 @@ const filePath = path.resolve(__dirname, "./01.txt");
 fs.open(filePath, "a", (err, fd) => {
     //参数err：如果文件打开失败 则存在err对象
     //参数fd:文件标识
+    console.log(fd);
     if (err) { //先进行错误优先处理
         console.log(err);
         return;
