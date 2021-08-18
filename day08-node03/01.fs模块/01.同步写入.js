@@ -8,4 +8,4 @@ const fd = fs.openSync("./01.txt", "a")
 fs.writeSync(fd, "锄禾日当午")
 
 //同步关闭
-fs.close(fd);
+fs.closeSync(fd);
