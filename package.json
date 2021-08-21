@@ -1,0 +1,15 @@
+{
+  "name": "yyds0607",
+  "version": "1.0.0",
+  "description": "以后所有代码交给github和gitee进行管理",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^5.13.7"
+  }
+}
