@@ -14,7 +14,11 @@ app.get("/", (req, res) => {
 //书写一个登录的接口
 app.get("/login", (req, res) => {
     console.log("登录请求");
-    res.send("登录成功")
+    // res.send("登录成功")
+    res.send({
+        code: 1,
+        type: "登录成功"
+    })
 })
 
 app.listen(3003, err => {

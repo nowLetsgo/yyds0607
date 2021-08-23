@@ -36,6 +36,40 @@
             //阻止默认事件，阻止表单跳转，而是进行ajax请求
             return false;
         } */
+
+
+
+        //原生ajax get请求
+        oBtn.onclick = function () {
+            //1.ajax核心对象XMLHttpRequest对象，这个对象的实例可以进行aja请求
+            const xhr = new XMLHttpRequest();
+            //2.打开路径
+            //open方法代开路径（参数1:请求方式,参数2:请求的接口地址,参数3:是否异步）
+            xhr.open("GET", "/login", true);
+            //3.发送请求(send方法的参数是发送的数据，但是get请求的数据都是在url地址上拼接的，所以send数据为空)
+            xhr.send(null)
+
+            //4.当我们的ajax请求开始进行的时候有一个readyState状态码，只要readyState状态码发生改变，那么就会触发onreadystatechange事件
+            xhr.onreadystatechange = function () {
+                // 当readystate状态码变成4的时候， 代表请求发送成功
+                // 当响应状态码status变成2XX的时候， 说明响应成功
+                if (xhr.readyState === 4 && 200 <= xhr.status <= 299) {
+                    //达到if条件说明请求成功并响应成功
+                    //xhr.responseXML:用来获取响应的xml数据
+                    //xhr.responseText:用来获取响应的其他文本格式数据(比如json)
+                    console.log(xhr.responseText); //得到的都是字符串格式，因为前后端传输一般会转成字符串传输
+                    const result = JSON.parse(xhr.responseText)
+                    console.log(result);
+
+                    if (result.code === 1) {
+                        alert("恭喜你登录成功")
+                    }
+                }
+
+            }
+            //阻止默认事件，阻止表单跳转，而是进行ajax请求
+            return false;
+        }
     </script>
 </body>
 
