@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/login" id="form">
+        请输入用户名：<input type="text" name="user" id="user">
+        <br>
+        请输入密码: <input type="password" name="pass" id="pass">
+        <br>
+        <button id="btn">登录</button>
+    </form>
+    <script>
+        const oForm = document.getElementById('form')
+        const oUser = document.getElementById('user')
+        const oPass = document.getElementById('pass')
+        const oBtn = document.getElementById('btn');
+
+        //给button按钮绑定点击事件 也可以导致当前按钮所在的form表单提交
+        /* oBtn.onclick = function () {
+            console.log("登录")
+
+            //阻止默认事件，阻止表单跳转，而是进行ajax请求
+            return false;
+        } */
+
+        /* oForm.onsubmit = function () {
+            console.log("登录")
+
+            //阻止默认事件，阻止表单跳转，而是进行ajax请求
+            return false;
+        } */
+    </script>
+</body>
+
+</html>
