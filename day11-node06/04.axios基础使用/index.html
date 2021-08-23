@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/jquery"></script>
+    <script src="/axios"></script>
+</head>
+
+<body>
+    <form action="/login" id="form">
+        请输入用户名：<input type="text" name="user" id="user">
+        <br>
+        请输入密码: <input type="password" name="pass" id="pass">
+        <br>
+        <button id="btn">登录</button>
+    </form>
+    <script>
+        //给form表单绑定提交事件
+        $("#btn").click(function () {
+            //1. axios基础使用1
+            //axios返回promise对象
+            /* axios({
+                method: "get", //请求方式
+                url: "/login", //请求接口地址
+                params: { //设置get请求时的数据
+                    user: $("#user").val(),
+                    pass: $("#pass").val(),
+                }
+            }).then(value => {
+                //得到的data是一个对象
+                //1.data:请求回来的数据 2.config：axios的配置 3.headers:响应头 4.request:当前请求的详细信息
+                console.log("请求成功", value);
+            }).catch(reason => {
+                console.log("请求失败", reason);
+            }) */
+
+
+            //1. axios基础使用2
+            //axios返回promise对象
+            /* axios({
+                method: "post", //请求方式
+                url: "/login", //请求接口地址
+                data: { //设置post请求时的数据
+                    user: $("#user").val(),
+                    pass: $("#pass").val(),
+                }
+            }).then(value => {
+                //得到的data是一个对象
+                //1.data:请求回来的数据 2.config：axios的配置 3.headers:响应头 4.request:当前请求的详细信息
+                console.log("请求成功", value);
+            }).catch(reason => {
+                console.log("请求失败", reason);
+            }) */
+
+
+            //2.axios的get方法的使用方式1
+            /* axios.get(`/login?user=${$("#user").val()}&&pass=${$("#pass").val()}`)
+                .then(value => {
+                    console.log("请求成功1", value);
+                }).catch(reason => {
+                    console.log("请求失败1", reason);
+                }) */
+
+            //3.axios的get方法的使用方式2  数据不想写在url地址上
+            /* axios.get(`/login`, {
+                    params: {
+                        user: $("#user").val(),
+                        pass: $("#pass").val(),
+                    }
+                })
+                .then(value => {
+                    console.log("请求成功2", value);
+                }).catch(reason => {
+                    console.log("请求失败2", reason);
+                }) */
+
+            //4.axios的post请求
+            /* axios.post("/login", {
+                    user: $("#user").val(),
+                    pass: $("#pass").val(),
+                })
+                .then(value => {
+                    console.log("请求成功3", value);
+                }).catch(reason => {
+                    console.log("请求失败3", reason);
+                }) */
+
+            return false;
+        })
+    </script>
+</body>
+
+</html>

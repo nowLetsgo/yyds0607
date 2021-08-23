@@ -20,30 +20,31 @@
     <script>
         //给form表单绑定提交事件
         $("#btn").click(function () {
-            // $.ajax({
-            //     url: "/login", //接口地址
-            //     type: "GET", //请求方式，默认get
-            //     async: true, //默认true  是否为异步
-            //     cache: false, //设置是否读取缓存 默认是true
-            //     contentType: "application/x-www-form-urlencoded", //默认
-            //     data: { //发送的数据
-            //         user: $("#user").val(),
-            //         pass: $("#pass").val()
-            //     },
+            //jquery的get请求
+            /* $.ajax({
+                url: "/login", //接口地址
+                type: "GET", //请求方式，默认get
+                async: true, //默认true  是否为异步
+                cache: false, //设置是否读取缓存 默认是true
+                contentType: "application/x-www-form-urlencoded", //默认
+                data: { //发送的数据
+                    user: $("#user").val(),
+                    pass: $("#pass").val()
+                },
 
-            //     // data: `user=${$("#user").val()}&pass=${$("#pass").val()}`, //发送的数据
-            //     headers: { //可以额外设置请求头
+                // data: `user=${$("#user").val()}&pass=${$("#pass").val()}`, //发送的数据
+                headers: { //可以额外设置请求头
 
-            //     },
-            //     dataType: "json", //预期服务器返回的类型
-            //     success(data) { //请求成功的回调函数，参数就是响应的值
-            //         console.log("data", data);
-            //     }
+                },
+                dataType: "json", //预期服务器返回的类型
+                success(data) { //请求成功的回调函数，参数就是响应的值
+                    console.log("data", data);
+                }
 
-            // })
+            }) */
 
-
-            $.ajax({
+            //jquery的post请求
+            /* $.ajax({
                 url: "/login", //接口地址
                 type: "post", //请求方式，默认get
                 async: true, //默认true  是否为异步
@@ -63,6 +64,35 @@
                     console.log("data", data);
                 }
 
+            }) */
+
+
+            //jquery的二级封装 get
+            /* //url:待载入页面的URL地址,data:待发送 Key/value 参数,callback:载入成功时回调函数,type:返回内容格式，xml, html, script, json, text, _default。
+            $.get("/login", { //发送的数据
+                user: $("#user").val(),
+                pass: $("#pass").val()
+            }, (data) => {
+                console.log("请求成功", data);
+            }, "json") */
+
+
+            //jquery的二级封装 post
+            //url:待载入页面的URL地址,data:待发送 Key/value 参数,callback:载入成功时回调函数,type:返回内容格式，xml, html, script, json, text, _default。
+            /* $.post("/login", { //发送的数据
+                user: $("#user").val(),
+                pass: $("#pass").val()
+            }, (data) => {
+                console.log("请求成功", data);
+            }, "json") */
+
+            //jquery的三级封装 getJSON
+            //url:发送请求地址。data:待发送 Key/value 参数。callback:载入成功时回调函数。
+            $.getJSON("/login", { //发送的数据
+                user: $("#user").val(),
+                pass: $("#pass").val()
+            },(data) => {
+                console.log("请求成功", data);
             })
 
             return false;
