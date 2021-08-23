@@ -45,7 +45,20 @@ app.get("/login", (req, res) => {
 app.post("/login", (req, res) => {
     //req.body不能直接被获取到，需要使用第三方的包来进行处理
     console.log("post请求报文体", req.body);
-    res.send("post请求接受到了")
+
+    if (req.body.user != "lipeihua" || req.body.pass != '123456') {
+        //登录失败
+        //res返回响应执行后 并return退出函数 不再继续向下执行
+        return res.send({
+            code: 0,
+            msg: "用户名或密码错误"
+        })
+    }
+    //登录成功
+    res.send({
+        code: 1,
+        msg: "登录成功啊"
+    })
 })
 
 app.listen(3003, err => {

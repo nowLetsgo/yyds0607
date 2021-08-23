@@ -93,11 +93,18 @@
             //2.打开路径
             //open方法代开路径（参数1:请求方式,参数2:请求的接口地址,参数3:是否异步）
             xhr.open("POST", `/login`, true);
-            //3.发送请求
+            //3.发送请求（send发送的格式是form表单格式）
             //post请求要设置请求体的content-type类型
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+            // xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
             //post请求发送的数据是在send中书写的
-            xhr.send(`user=${user}&pass=${pass}`)
+            // xhr.send(`user=${user}&pass=${pass}`)
+
+            //3.发送请求（send发送的是json字符串的格式）
+            xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8")
+            xhr.send(JSON.stringify({
+                user,
+                pass
+            }))
             //4.当我们的ajax请求开始进行的时候有一个readyState状态码，只要readyState状态码发生改变，那么就会触发onreadystatechange事件
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4 && 200 <= xhr.status <= 299) {
