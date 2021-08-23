@@ -38,14 +38,34 @@
         } */
 
 
-
+        /* 
+            接口详情：
+                接口地址：/login
+                返回格式：json
+                请求方式：get
+                请求参数说明：
+                    user:表示用户名
+                    pass：表示密码
+                返回参数说明：
+                    code：1代表登录成功 0代表登录失败
+                    msg:代表详情
+        
+        
+        */
         //原生ajax get请求
         oBtn.onclick = function () {
-            //1.ajax核心对象XMLHttpRequest对象，这个对象的实例可以进行aja请求
+            //获取用户数据
+            const user = oUser.value;
+            const pass = oPass.value;
+
+            //get请求
+            /* //1.ajax核心对象XMLHttpRequest对象，这个对象的实例可以进行aja请求
             const xhr = new XMLHttpRequest();
             //2.打开路径
             //open方法代开路径（参数1:请求方式,参数2:请求的接口地址,参数3:是否异步）
-            xhr.open("GET", "/login", true);
+            //get请求是把数据放在url地址上
+            //不读取缓存可以让每次请求的地址不一样即可不读取缓存,可以在地址栏添加一个时间戳
+            xhr.open("GET", `/login?user=${user}&pass=${pass}&_t=${Date.now()}`, true);
             //3.发送请求(send方法的参数是发送的数据，但是get请求的数据都是在url地址上拼接的，所以send数据为空)
             xhr.send(null)
 
@@ -65,8 +85,32 @@
                         alert("恭喜你登录成功")
                     }
                 }
+            } */
 
+
+            //post请求
+            const xhr = new XMLHttpRequest();
+            //2.打开路径
+            //open方法代开路径（参数1:请求方式,参数2:请求的接口地址,参数3:是否异步）
+            xhr.open("POST", `/login`, true);
+            //3.发送请求
+            //post请求要设置请求体的content-type类型
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=utf-8")
+            //post请求发送的数据是在send中书写的
+            xhr.send(`user=${user}&pass=${pass}`)
+            //4.当我们的ajax请求开始进行的时候有一个readyState状态码，只要readyState状态码发生改变，那么就会触发onreadystatechange事件
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && 200 <= xhr.status <= 299) {
+                    console.log(xhr.responseText);
+                    const result = JSON.parse(xhr.responseText)
+                    console.log(result);
+
+                    if (result.code === 1) {
+                        alert("恭喜你登录成功")
+                    }
+                }
             }
+
             //阻止默认事件，阻止表单跳转，而是进行ajax请求
             return false;
         }
