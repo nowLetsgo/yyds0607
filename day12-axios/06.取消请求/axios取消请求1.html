@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn1">请求1</button>
+    <button id="btn2">取消请求</button>
+    <script>
+        const oBtn1 = document.getElementById('btn1')
+        const oBtn2 = document.getElementById('btn2')
+        /* 
+            响应拦截器：
+                得到响应后，在处理之前，会首先触发响应拦截器，然后再进行接下来的处理
+        
+        */
+
+        //创建一个新的axios请求对象
+        const myAxios = axios.create({
+            baseURL: "http://127.0.0.1:3004"
+        });
+
+        // 取消请求第一步：可以使用 CancelToken.source 工厂方法创建 cancel token
+        const CancelToken = axios.CancelToken;
+        const source = CancelToken.source();
+
+        //发送请求
+        oBtn1.onclick = function () {
+            myAxios({
+                    url: "http://127.0.0.1:3004/login",
+                    method: "get",
+                    params: {
+                        name: "laowang111",
+                        pass: 123456
+                    },
+                    // 取消请求第二步 给要被取消的请求做一个标记
+                    cancelToken: source.token
+                })
+                .then(data => {
+                    console.log("then中的值", data);
+                })
+                .catch(reason => {
+                    //当请求被取消以后，会直接被送进catch中
+                    console.log("catch中的值", reason);
+
+                    //4.在axios中 有一个isCancel方法，可以检测是否是因为取消请求进入catch
+                    if (axios.isCancel(reason)) {
+                        console.log("你就是被取消了送进来的");
+                    }
+                })
+        }
+
+        //取消请求
+        oBtn2.onclick = function () {
+            //3.取消请求第三步 取消请求发生
+            source.cancel("我取消了请求")
+        }
+    </script>
+</body>
+
+</html>

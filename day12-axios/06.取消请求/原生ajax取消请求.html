@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="/login" id="form">
+        请输入用户名：<input type="text" name="user" id="user">
+        <br>
+        请输入密码: <input type="password" name="pass" id="pass">
+        <br>
+        <button id="btn">登录</button>
+    </form>
+    <button id="cancel">取消请求</button>
+    <script>
+        const oForm = document.getElementById('form')
+        const oUser = document.getElementById('user')
+        const oPass = document.getElementById('pass')
+        const oBtn = document.getElementById('btn');
+        const oCancel = document.getElementById('cancel')
+
+        let xhr = null;
+        //原生ajax get请求
+        oBtn.onclick = function () {
+            //获取用户数据
+            const user = oUser.value;
+            const pass = oPass.value;
+
+            //get请求
+            xhr = new XMLHttpRequest();
+            //2.打开路径
+            xhr.open("GET", `http://127.0.0.1:3004/login?user=${user}&pass=${pass}&_t=${Date.now()}`, true);
+            //3.发送请求(send方法的参数是发送的数据，但是get请求的数据都是在url地址上拼接的，所以send数据为空)
+            xhr.send(null)
+
+            //4.当我们的ajax请求开始进行的时候有一个readyState状态码，只要readyState状态码发生改变，那么就会触发onreadystatechange事件
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState !== 4) return;
+                if (200 <= xhr.status <= 299) {
+                    console.log("成功", xhr.responseText);
+                    return;
+                }
+                console.log("失败");
+            }
+
+
+            //阻止默认事件，阻止表单跳转，而是进行ajax请求
+            return false;
+        }
+
+
+        oCancel.onclick = function () {
+            //取消ajax请求
+            xhr.abort();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn1">请求1</button>
+    <script>
+        const oBtn1 = document.getElementById('btn1')
+        /* 
+            响应拦截器：
+                得到响应后，在处理之前，会首先触发响应拦截器，然后再进行接下来的处理
+        
+        */
+
+        //创建一个新的axios请求对象
+        const myAxios = axios.create({
+            baseURL: "http://127.0.0.1:3004"
+        });
+
+        //对当前的axios的绑定响应拦截器
+        myAxios.interceptors.response.use(response => {
+            console.log("响应拦截器得到响应的内容", response);
+
+            //这个位置可以对响应的对象response进行处理 处理后在交给then处理
+            /* 
+                请求并响应成功，并不一定我们想要的内容，比如如果都是200可能会有如下情况:
+                {
+                    code:10000,
+                    msg:"登录成功"
+                }
+                {
+                    code:10001,
+                    msg:"密码错误"
+                }
+            
+            */
+
+            //根据上边的案例可以处理，如果登录成功再进入then，否则进入catch
+            if (response.data.code === 10000) {
+                return response.data
+            } else {
+                return Promise.reject(response.data.code)
+            }
+
+            //响应拦截器中 一定要有return，是返回给axios的then中使用的，return什么，then中就接受什么
+            // return response.data;
+        }, err => {
+            return Promise.reject(err);
+        })
+
+        oBtn1.onclick = function () {
+            myAxios({
+                    url: "http://127.0.0.1:3004/login",
+                    method: "get",
+                    params: {
+                        name: "laowang111",
+                        pass: 123456
+                    }
+                })
+                .then(data => {
+                    console.log("then中的值", data);
+                })
+                .catch(reason => {
+                    console.log("catch中的值", reason);
+                })
+        }
+    </script>
+</body>
+
+</html>
