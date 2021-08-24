@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/axios"></script>
+</head>
+
+<body>
+    <button id="btn1">增</button>
+    <script>
+        const oBtn1 = document.getElementById('btn1')
+
+        function myAxios({
+            url,
+            method = "get",
+            data = {},
+            params = {}
+        }) {
+            return new Promise((resolve, reject) => {
+                //1.获取了xhr对象 用来ajax请求
+                const xhr = new XMLHttpRequest();
+
+                //判断当前的请求方式 或者判断是否有params来看一下当前是否要把数据拼接在url上
+                let query = "";
+                if (params) {
+                    /* 
+                        {
+                            user:laoli,
+                            pass:12345
+                        }
+
+                        ?user=laoli&pass=12345
+
+                        //写法1
+                        let str = "?";
+                        for (let key in params) {
+                            str += key + "=" + pa[key] + "&";
+                        }
+                        
+                    */
+                    query = Object.keys(params).reduce((p, c) => {
+                        return p + c + "=" + params[c] + "&"
+                    }, "?").slice(0, -1);
+
+                }
+                //2.打开路径
+                xhr.open(method, url + query, true);
+
+                //3.发送数据
+                //判断请求方式是什么请求
+                method = method.toLowerCase(); //统一转换为小写
+                if (method === "post" || method === "put") {
+                    //需要在send中发送data数据
+                    xhr.setRequestHeader("Content-Type", "application/json;charset=utf-8");
+                    xhr.send(JSON.stringify(data));
+                } else {
+                    xhr.send()
+                }
+
+                //执行事件
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState !== 4) return;
+                    if (200 <= xhr.status <= 299) {
+                        resolve({
+                            data: JSON.parse(xhr.responseText),
+                            config: {},
+                            headers: {},
+                            request: {}
+                        })
+                        return;
+                    }
+
+                    reject(`${url}:${xhr.status}，${xhr.statusText}`);
+                }
+
+            })
+        }
+
+        //增
+        oBtn1.onclick = function () {
+            myAxios({
+                    url: "/user",
+                    method: "put",
+                    data: {
+                        name: "laowang",
+                        pass: 123
+                    },
+                    /* params: {
+                        name: "laowang",
+                        pass: 123
+                    } */
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(reason => {
+                    console.log(reason);
+                })
+        }
+    </script>
+</body>
+
+</html>

@@ -12,22 +12,30 @@ app.use(bodyParser.urlencoded({
 
 app.get("/user", (req, res) => {
     console.log(req.query);
-    res.send("查询成功")
+    res.send({
+        type: "查询成功"
+    })
 })
 
 app.post("/user", (req, res) => {
     console.log(req.body);
-    res.send("新增成功")
+    res.send({
+        type: "新增成功"
+    })
 })
 
 app.put("/user", (req, res) => {
     console.log(req.body);
-    res.send("修改成功")
+    res.send({
+        type: "修改成功"
+    })
 })
 
 app.delete("/user", (req, res) => {
     console.log(req.query);
-    res.send("删除成功")
+    res.send({
+        type: "删除成功"
+    })
 })
 
 
@@ -37,7 +45,8 @@ app.get("/axios", (req, res) => {
 })
 
 app.get("/", (req, res) => {
-    const filePath = path.resolve(__dirname, "./02.axios基础使用2.html");
+    // const filePath = path.resolve(__dirname, "./02.axios基础使用2.html");
+    const filePath = path.resolve(__dirname, "./03.手写axios.html");
     res.sendFile(filePath);
 })
 
