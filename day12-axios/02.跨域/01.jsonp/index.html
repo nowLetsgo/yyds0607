@@ -28,9 +28,13 @@
         function fn(resulte) {
             console.log(resulte);
         }
+        let newScript = null;
         oBtn.onclick = function () {
+            if (newScript) {
+                newScript.remove();
+            }
             //创建一个script标签
-            const newScript = document.createElement("script");
+            newScript = document.createElement("script");
             newScript.src = 'http://127.0.0.1:3004/data?user=laoli&pass=123&callback=fn';
             //把script标签插入到页面之后，就会立马执行并请求数据
             document.body.appendChild(newScript);
