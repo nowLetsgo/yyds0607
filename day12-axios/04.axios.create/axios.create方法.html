@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn1">请求1</button>
+    <button id="btn2">请求2</button>
+    <script>
+        const oBtn1 = document.getElementById('btn1')
+        const oBtn2 = document.getElementById('btn2')
+
+        //可以使用axios.create方法自定义的配置一个axios对象
+        const myAxios1 = axios.create({
+            baseURL: "http://127.0.0.1:3004",
+            headers: {},
+            timeout: 30000
+        })
+        const myAxios2 = axios.create({
+            baseURL: "http://127.0.0.1:3005",
+            headers: {},
+            timeout: 30000
+        })
+
+        oBtn1.onclick = function () {
+            myAxios1({
+                    url: "/login",
+                    method: "get",
+                    params: {
+                        name: "laowang",
+                        pass: 123
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(reason => {
+                    console.log(reason);
+                })
+        }
+
+        oBtn2.onclick = function () {
+            myAxios2({
+                    url: "http://127.0.0.1:3005/regist",
+                    method: "get",
+                    params: {
+                        name: "laowang",
+                        pass: 123
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(reason => {
+                    console.log(reason);
+                })
+        }
+    </script>
+</body>
+
+</html>

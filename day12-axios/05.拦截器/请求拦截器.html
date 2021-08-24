@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn1">请求1</button>
+    <script>
+        const oBtn1 = document.getElementById('btn1')
+        /* 
+            请求拦截器：
+                发送请求之前，会首先触发请求拦截器，然后在发送给服务端请求
+        
+        */
+
+        //创建一个新的axios请求对象
+        const myAxios = axios.create({
+            baseURL: "http://127.0.0.1:3004"
+        });
+
+        //对当前的axios的绑定请求拦截器
+        //请求拦截器的第一个参数回调函数是对请求的处理，第二个参数回调函数是进入请求拦截器失败，处理失败的
+        myAxios.interceptors.request.use((config) => {
+            //请求拦截器拿到的是请求的配置信息
+            console.log("config", config);
+
+            //案例：在拦截器中给重新对params参数进行控制
+            config.params.tel = 15701665566;
+
+            //在请求拦截器中一般是对config进行优化配置，但是请求拦截器的回调函数一定要把这个config对象return出去， 否则无法继续请求,被当做取消请求
+            return config;
+        }, err => {
+            //只有失败的promise对象才能进入axios错误处理的catch中，所以此时返回一个失败的promise对象
+            return Promise.reject(err)
+        })
+        oBtn1.onclick = function () {
+            myAxios({
+                    url: "http://127.0.0.1:3004/login",
+                    method: "get",
+                    params: {
+                        name: "laowang111",
+                        pass: 123456
+                    }
+                })
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(reason => {
+                    console.log(reason);
+                })
+        }
+    </script>
+</body>
+
+</html>
