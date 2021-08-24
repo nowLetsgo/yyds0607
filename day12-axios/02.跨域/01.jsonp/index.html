@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./axios.min.js"></script>
+</head>
+
+<body>
+    <button id="btn">请求登录</button>
+    <script>
+        /* 
+            同源策略：
+                - 同源策略是浏览器拥有
+                - 协议 域名 端口号 必须全部一致才是同源
+                - 如果有一个不一致则违背了同源策略，我们无法接收到ajax跨域请求的响应
+
+            jsonp:
+                script标签的src属性是可以进行跨域的，所以我们使用script标签进行跨域请求的方式被称作为jsonp
+        
+        */
+        const oBtn = document.getElementById('btn');
+
+        //回调函数
+        function fn(resulte) {
+            console.log(resulte);
+        }
+        oBtn.onclick = function () {
+            //创建一个script标签
+            const newScript = document.createElement("script");
+            newScript.src = 'http://127.0.0.1:3004/data?user=laoli&pass=123&callback=fn';
+            //把script标签插入到页面之后，就会立马执行并请求数据
+            document.body.appendChild(newScript);
+        }
+    </script>
+
+</body>
+
+</html>
