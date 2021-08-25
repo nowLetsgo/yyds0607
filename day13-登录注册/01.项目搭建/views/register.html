@@ -51,6 +51,17 @@
         const oPassWord = document.getElementById('password')
         const oPassWordAgain = document.getElementById('password2')
 
+        //响应拦截器
+        axios.interceptors.response.use(response => {
+            //响应数据
+            console.log("拦截器中的响应数据", response);
+            if (response.data.code === 10000) {
+                //如果得到的结果的code状态码是10000 说明登录成功，则把响应的值交给axios的then处理
+                return response.data;
+            } else {
+                return Promise.reject(response.data)
+            }
+        })
         //表单提交事件
         oForm.onsubmit = function () {
             //获取用户输入的数据
@@ -74,30 +85,19 @@
                     password
                 })
                 .then(value => {
+                    alert(value.msg);
                     console.log("服务端响应的数据是", value);
-                    /* 
-                        拿到的数据格式是
-                        {
-                            code: 10000,
-                            msg: "注册成功"
-                        }
-
-                        {
-                            code: 10001,
-                            msg: "用户名已经被注册"
-                        }
-                    */
-
-                    if (value.data.code === 10000) {
-                        alert(value.data.msg);
-                        //跳转到登录页面登录
-                        location.href = "./login.html"
-                    } else {
-                        alert(value.data.msg);
-                    }
+                    //跳转到首页
+                    location.href = "./login.html"
                 })
                 .catch(reason => {
-                    console.log("服务端报错，报错信息是", reason);
+                    console.log("报错信息是", reason);
+                    //判断如果得到的是数据是拥有code编码的，则给用户提示具体信息
+                    if (reason.code) {
+                        alert(reason.msg)
+                    } else {
+                        alert("服务端报错", reason)
+                    }
                 })
 
             return false;
