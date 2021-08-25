@@ -75,6 +75,26 @@
                 })
                 .then(value => {
                     console.log("服务端响应的数据是", value);
+                    /* 
+                        拿到的数据格式是
+                        {
+                            code: 10000,
+                            msg: "注册成功"
+                        }
+
+                        {
+                            code: 10001,
+                            msg: "用户名已经被注册"
+                        }
+                    */
+
+                    if (value.data.code === 10000) {
+                        alert(value.data.msg);
+                        //跳转到登录页面登录
+                        location.href = "./login.html"
+                    } else {
+                        alert(value.data.msg);
+                    }
                 })
                 .catch(reason => {
                     console.log("服务端报错，报错信息是", reason);
