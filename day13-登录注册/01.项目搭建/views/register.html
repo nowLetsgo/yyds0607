@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>
+        register3
+    </title>
+    <link href="/public/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link type="text/css" href="/public/css/register3.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="center">
+        <div id="logo">
+            <img src="/public/img/logo.png" alt="">
+            <h2>请开始注册</h2>
+        </div>
+        <form name="myform" onsubmit="return validateform()" enctype="multipart/form-data" action="cgi-bin/login2.cgi"
+            method="post" id="myform">
+            <div class="input-group">
+                <span id="span_username">用户名：</span>
+                <input class="form-control" id="username" name="username" type="text" value=""
+                    placeholder="只能输入字母或数字，4-16个字符" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <span id="span_password">密码：</span>
+                <input class="form-control" id="password" name="password" type="password" value=""
+                    placeholder="密码长度6-12位" autocomplete="off">
+            </div>
+            <div class="input-group">
+                <span id="span_password2">确认密码：</span>
+                <input class="form-control" id="password2" name="password2" type="password" value=""
+                    placeholder="请输入确认密码" autocomplete="off">
+            </div>
+            <div id="btn_div">
+                <input name="registerButton" class="btn btn-primary" type="submit" id="register" value="注册">
+                <a href="login.html">
+                    <input class="btn btn-primary" name="loginButton" id="login" type="button" value="登录">
+                </a>
+            </div>
+        </form>
+    </div>
+    <div id="bottom">
+        <div class="footer" style="color:white;">
+            Copyright © 2013-2019 All Rights Reserved. 备案号：
+        </div>
+    </div>
+</body>
+
+</html>
