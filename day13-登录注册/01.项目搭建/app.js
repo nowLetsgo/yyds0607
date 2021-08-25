@@ -20,8 +20,35 @@ app.use(express.urlencoded({ //解决post发送的报文体格式是表单格式
 }))
 app.use(express.json()); //解决post发送的报文体格式是json格式
 
+//书写一个正则处理的中间件
+app.use((req, res, next) => {
+    //先拿到用户的输入内容
+    const {
+        username,
+        password
+    } = req.body;
+    console.log(username, password);
+
+    //书写用户名和密码的正则
+    const userReg = /^[a-zA-Z]{1}[0-9a-zA-Z_]{5,9}$/g;
+    const passReg = /^[0-9]{3,6}$/g;
+
+    if (!userReg.test(username) || !passReg.test(password)) {
+        //处理不符合正则的
+        return res.send({
+            code: 20000,
+            msg: "账号名和密码格式错误"
+        })
+    }
+
+    //如果正则校验成功，则直接进入下一步操作
+    next();
+
+})
+
 //注册接口
 app.post("/register", async (req, res) => {
+
     //查看用户发送的信息
     console.log("注册时用户发送的数据", req.body);
 
@@ -64,6 +91,7 @@ app.post("/register", async (req, res) => {
 
 // 登录接口
 app.post("/login", async (req, res) => {
+
     console.log("登录的数据", req.body);
     //拿到用户的登录信息
     const {
