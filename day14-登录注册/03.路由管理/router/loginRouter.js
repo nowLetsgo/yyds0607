@@ -35,6 +35,12 @@ router.post("/login", async (req, res) => {
         })
     }
 
+    //设置cookie
+    res.cookie("userID", isHasUser._id, {
+        // expires: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7) //expires是http1.0版本提供的，后边跟的是一个时间
+        maxAge: 1000 * 60 * 60 * 24 * 7, //maxAge是http1.1版本提供的，后边跟的是毫秒数
+        httpOnly: true //限制客户端操作cookie
+    })
     //当代码运行到这个位置，则表示登录成功
     res.send({
         code: 10000,
