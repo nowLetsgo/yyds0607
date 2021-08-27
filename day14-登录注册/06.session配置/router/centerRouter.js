@@ -16,7 +16,7 @@ router.post("/center", async (req, res) => {
     //权限判断
     console.log("userINFO", req.session.user)
 
-    if (eq.session.user) {
+    if (req.session.user) {
         res.send({
             code: 10000,
             msg: req.session.user.username //返回用户名

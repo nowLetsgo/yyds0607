@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+//引入自动打开浏览器的模块
+const open = require("./util/open");
+
 //连接数据库
 require("./db");
 //引入userModel集合
@@ -52,4 +55,5 @@ app.listen("3005", err => {
         return;
     }
     console.log("服务器启动成功 请访问 http://127.0.0.1:3005");
+    open("3005", "127.0.0.1")
 })
