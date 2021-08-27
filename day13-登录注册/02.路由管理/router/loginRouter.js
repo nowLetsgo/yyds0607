@@ -17,7 +17,7 @@ router.post("/login", async (req, res) => {
     const isHasUser = await userModel.findOne({
         username
     })
-    console.log(isHasUser)
+    console.log("isHasUser", isHasUser)
 
     //当用户名不存在的时候 则直接响应信息
     if (!isHasUser) {

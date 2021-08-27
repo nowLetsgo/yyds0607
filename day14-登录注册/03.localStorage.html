@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="red">red</button>
+    <button id="green">green</button>
+    <button id="yellow">yellow</button>
+    <button id="blue">blue</button>
+
+    <button id="reset">reset</button>
+
+    <script>
+        //每次进入页面检测当前主题
+        if (localStorage.getItem("bgColor")) {
+            //如果关于页面主题的localStorage存在，则替换
+            document.body.style.background = localStorage.getItem("bgColor");
+        }
+
+
+        const oRed = document.getElementById('red');
+        const oGreen = document.getElementById('green');
+        const oYellow = document.getElementById('yellow');
+        const oBlue = document.getElementById('blue');
+        const oReset = document.getElementById('reset');
+        /* 
+            localStorage接口：
+                setItem(key,value)
+                getItem(key)
+                removeItem(key)
+        
+        
+        
+        */
+        oRed.onclick = function () {
+            document.body.style.backgroundColor = "red";
+            localStorage.setItem("bgColor", "red")
+        }
+        oGreen.onclick = function () {
+            document.body.style.backgroundColor = "green";
+            localStorage.setItem("bgColor", "green")
+        }
+        oYellow.onclick = function () {
+            document.body.style.backgroundColor = "yellow";
+            localStorage.setItem("bgColor", "yellow")
+        }
+        oBlue.onclick = function () {
+            document.body.style.backgroundColor = "blue";
+            localStorage.setItem("bgColor", "blue")
+        }
+        oReset.onclick = function () {
+            document.body.style.backgroundColor = "";
+            localStorage.removeItem("bgColor")
+        }
+    </script>
+</body>
+
+</html>
