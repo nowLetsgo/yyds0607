@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="/public/js/axios.min.js"></script>
+</head>
+
+<body>
+    <h1>个人首页</h1>
+    <div></div>
+    <script>
+        /* 
+            在加载首页内容之前要先进行权限控制 
+         */
+
+        axios.post("/center")
+            .then(value => {
+                if (value.data.code === 10001) {
+                    alert(value.data.msg)
+                    //如果code是10001说明没有权限，则直接跳转登录页面
+                    location.href = "./login.html"
+                    return;
+                }
+                if (value.data.code === 10000) {
+                    alert(value.data.msg + "欢迎回家")
+                    
+                }
+            })
+            .catch(reason => {
+                console.log("服务器出错", reason);
+            })
+
+
+            
+    </script>
+</body>
+
+</html>
