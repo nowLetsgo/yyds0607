@@ -17,7 +17,9 @@
             axios({
                     method: "get",
                     url: "/img",
-                    Headers: {}
+                    headers: {
+                        "Cache-Control": "max-age=10000"
+                    }
                 })
                 .then(value => {
                     console.log(value);
