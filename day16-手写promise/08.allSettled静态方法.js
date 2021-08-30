@@ -42,6 +42,16 @@ function myPromise(exector) {
 //then方法我们设计的是 内部的函数是异步调用的
 myPromise.prototype.then = function (onResolved, onRejected) {
     const _this = this;
+    //处理值穿透，判断用户是否传递onResolved 和 onRejected两个函数
+    //1.用户传递的onRejected不是一个函数
+    onRejected = typeof onRejected !== "function" ? function (reason) {
+        throw reason;
+    } : onRejected;
+    //2.用户传递的onResolved 不是一个函数
+    onResolved = typeof onResolved !== 'function' ? function (value) {
+        return value
+    } : onResolved
+
 
     //then方法一定会返回一个promise对象
     return new myPromise((resolve, reject) => {
@@ -177,5 +187,71 @@ myPromise.reject = function (mes) {
     //无论mes是成功还是失败的promise对象，或者不是promise对象。都将返回失败的promise对象
     return new myPromise((resolve, reject) => {
         reject(mes)
+    })
+}
+
+
+//all静态方法
+//检测多个promise对象，如果都成功，则返回成功的promise对象，值为所有成功值组成的数组
+//如果有一个失败，则all直接返回失败
+myPromise.all = function (allPromise) {
+    return new myPromise((resolve, reject) => {
+        //初始化一个计数器
+        let promiseNum = 0;
+        //初始化一个数组，用来存在每一个成功的promise对象的值
+        const promiseArr = [];
+        //获取传入all方法中的promise对象的长度
+        const promiseLen = allPromise.length;
+        //一个个的检测allPromise中的promise对象的状态
+        allPromise.forEach((item, index) => {
+            //使用then方法检测promise对象的成功或者失败
+            item.then(value => {
+                //每次成功一个就让计数器累加
+                promiseNum++;
+                //每次成功后，把当前promise的值保存在数组中，请使用下标保存，这样可以保证顺序
+                promiseArr[index] = value;
+                //判断当promise的长度等于传入的promise组成的数组的长度的时候，说明全部成功，则返回成功的promise对象
+                if (promiseLen === promiseNum) {
+                    resolve(promiseArr)
+                }
+            }, reason => {
+                //只要有一个失败的，则all直接返回失败的promise对象，值也是这个失败的值
+                reject(reason)
+            })
+        })
+    })
+}
+
+//allSettled静态方法
+//无论allPromise中的promise对象是成功还是失败，都要返回成功的promise对象
+//值为所有promise对象组成的数组
+myPromise.allSettled = function (allPromise) {
+    return new myPromise((resolve, reject) => {
+        //初始化一个计数器
+        let promiseNum = 0;
+        //初始化一个数组，用来存在每一个成功的promise对象的值
+        const promiseArr = [];
+        //获取传入all方法中的promise对象的长度
+        const promiseLen = allPromise.length;
+        allPromise.forEach((item, index) => {
+            //使用then和catch判断当前进入的promise对象是否执行结束，如果结束，则把结果放在对应的数组中位置里去
+            item.then(value => {
+                //无论是成功还是失败，都要累加
+                promiseNum++;
+                //把当前成功的promise对象放入数组中
+                promiseArr[index] = item;
+                //判断是否执行完成
+                if (promiseNum === promiseLen) {
+                    resolve(promiseArr)
+                }
+            }, reason => {
+                promiseNum++;
+                //把当前成功的promise对象放入数组中
+                promiseArr[index] = item;
+                if (promiseNum === promiseLen) {
+                    resolve(promiseArr)
+                }
+            })
+        })
     })
 }

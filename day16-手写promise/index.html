@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./05.finally的调用和返回值.js"></script>
+    <script src="./08.allSettled静态方法.js"></script>
 </head>
 
 <body>
     <script>
         const p1 = new myPromise((resolve, reject) => {
-            reject("error");
-            // resolve("success");
+            // reject("error");
+            resolve("success");
         });
 
         console.log("p1", p1); //{status:"pending",value:undefined}
@@ -25,16 +25,23 @@
         })
         console.log("p2", p2);
 
+        /* 
+                const p3 = myPromise.resolve(new Promise((resolve, reject) => {
+                    reject("err");
+                }));
+                console.log("p3", p3);
 
-        const p3 = myPromise.resolve(new Promise((resolve, reject) => {
-            reject("err");
-        }));
-        console.log("p3", p3);
+                const p4 = myPromise.reject(new Promise((resolve, reject) => {
+                    reject("err");
+                }));
+                console.log("p3", p4); */
 
-        const p4 = myPromise.reject(new Promise((resolve, reject) => {
-            reject("err");
-        }));
-        console.log("p3", p4);
+
+        /*  const p11 = myPromise.resolve(1);
+         const p22 = myPromise.reject(2);
+         const p33 = myPromise.resolve(3);
+         const all = myPromise.allSettled([p11, p22, p33]);
+         console.log("all", all); */
     </script>
 </body>
 

@@ -179,3 +179,35 @@ myPromise.reject = function (mes) {
         reject(mes)
     })
 }
+
+
+//all静态方法
+//检测多个promise对象，如果都成功，则返回成功的promise对象，值为所有成功值组成的数组
+//如果有一个失败，则all直接返回失败
+myPromise.all = function (allPromise) {
+    return new myPromise((resolve, reject) => {
+        //初始化一个计数器
+        let promiseNum = 0;
+        //初始化一个数组，用来存在每一个成功的promise对象的值
+        const promiseArr = [];
+        //获取传入all方法中的promise对象的长度
+        const promiseLen = allPromise.length;
+        //一个个的检测allPromise中的promise对象的状态
+        allPromise.forEach((item, index) => {
+            //使用then方法检测promise对象的成功或者失败
+            item.then(value => {
+                //每次成功一个就让计数器累加
+                promiseNum++;
+                //每次成功后，把当前promise的值保存在数组中，请使用下标保存，这样可以保证顺序
+                promiseArr[index] = value;
+                //判断当promise的长度等于传入的promise组成的数组的长度的时候，说明全部成功，则返回成功的promise对象
+                if (promiseLen === promiseNum) {
+                    resolve(promiseArr)
+                }
+            }, reason => {
+                //只要有一个失败的，则all直接返回失败的promise对象，值也是这个失败的值
+                reject(reason)
+            })
+        })
+    })
+}
