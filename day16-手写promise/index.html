@@ -18,15 +18,12 @@
         console.log("p1", p1); //{status:"pending",value:undefined}
 
         const p2 = p1.then(value => {
-            console.log(value);
-            return 1;
-        }, reason => {
-            console.log(reason);
-            // throw new Error("error")
-            return new myPromise((resolve, reject) => {
-                reject(1111)
-            });
-        })
+                console.log(value);
+                return 1;
+            })
+            .catch(reason => {
+                console.log(reason);
+            })
 
         console.log("p2", p2);
     </script>
