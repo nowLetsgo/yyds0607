@@ -6,26 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./03.promise的then返回值.js"></script>
+    <script src="./05.finally的调用和返回值.js"></script>
 </head>
 
 <body>
     <script>
         const p1 = new myPromise((resolve, reject) => {
             reject("error");
+            // resolve("success");
         });
 
         console.log("p1", p1); //{status:"pending",value:undefined}
 
-        const p2 = p1.then(value => {
-                console.log(value);
-                return 1;
+        const p2 = p1.finally(() => {
+            return new myPromise((resolve, reject) => {
+                reject("1111")
             })
-            .catch(reason => {
-                console.log(reason);
-            })
-
+        })
         console.log("p2", p2);
+
+
+        const p3 = myPromise.resolve(new Promise((resolve, reject) => {
+            reject("err");
+        }));
+        console.log("p3", p3);
+
+        const p4 = myPromise.reject(new Promise((resolve, reject) => {
+            reject("err");
+        }));
+        console.log("p3", p4);
     </script>
 </body>
 

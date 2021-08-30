@@ -150,3 +150,31 @@ myPromise.prototype.finally = function (onResolved) {
         }
     })
 }
+
+//resolve静态方法
+//本身返回成功的promise对象。但是如果resolve的参数是一个失败的promise对象，则resolve返回一个失败的promise对象
+myPromise.resolve = function (mes) {
+    return new myPromise((resolve, reject) => {
+        //检测mes是否是一个promise对象
+        if (mes instanceof myPromise) {
+            //判断mes是成功的还是失败的
+            mes.then(value => {
+                resolve(value)
+            }, reason => {
+                reject(reason)
+            })
+        } else {
+            //如果mes不是promise对象。直接就是成功，值为mes这个值
+            resolve(mes)
+        }
+    })
+}
+
+
+//reject静态方法
+myPromise.reject = function (mes) {
+    //无论mes是成功还是失败的promise对象，或者不是promise对象。都将返回失败的promise对象
+    return new myPromise((resolve, reject) => {
+        reject(mes)
+    })
+}
