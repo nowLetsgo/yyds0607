@@ -20,3 +20,5 @@ function myPromise(exector) {
     exector(resolve, reject);
     
 }
+
+
