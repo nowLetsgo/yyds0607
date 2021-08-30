@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="./02.promise的then方法.js"></script>
+    <script src="./03.promise的then返回值.js"></script>
 </head>
 
 <body>
@@ -15,14 +15,20 @@
             reject("error");
         });
 
-        console.log(p1); //{status:"pending",value:undefined}
+        console.log("p1", p1); //{status:"pending",value:undefined}
 
-        p1.then(value => {
+        const p2 = p1.then(value => {
             console.log(value);
+            return 1;
         }, reason => {
             console.log(reason);
+            // throw new Error("error")
+            return new myPromise((resolve, reject) => {
+                reject(1111)
+            });
         })
 
+        console.log("p2", p2);
     </script>
 </body>
 
