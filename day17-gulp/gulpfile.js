@@ -8,6 +8,10 @@ const babel = require("gulp-babel");
 const browserify = require("gulp-browserify");
 //修改名字的包
 const rename = require("gulp-rename");
+//less编译
+const less = require("gulp-less");
+//concat合并
+const concat = require("gulp-concat");
 
 
 //新建一个任务
@@ -41,3 +45,21 @@ gulp.task("browserify", () => {
 
 //对上边的三个任务统一配置，要按照顺序依次执行 需要使用gulp.series方法
 gulp.task("js-dev", gulp.series(["jshint", "babel", "browserify"]))
+
+
+//less解析的任务
+gulp.task("less", () => {
+    return gulp.src("./src/less/*.less")
+        .pipe(less())
+        .pipe(concat("all.css")) //把解析的所有的css合并成一个文件all.css
+        .pipe(gulp.dest("./dist/css"))
+})
+
+//处理html
+gulp.task("html", () => {
+    return gulp.src("./src/index.html")
+        .pipe(gulp.dest("./dist"))
+})
+
+//统一html css js的配置
+gulp.task("dev", gulp.parallel(["js-dev", "less", "html"]))
