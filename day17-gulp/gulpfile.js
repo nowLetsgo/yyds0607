@@ -4,6 +4,11 @@ const gulp = require("gulp");
 const jshint = require('gulp-jshint')
 //babel编译的包
 const babel = require("gulp-babel");
+//browserfiy包
+const browserify = require("gulp-browserify");
+//修改名字的包
+const rename = require("gulp-rename");
+
 
 //新建一个任务
 gulp.task("jshint", () => {
@@ -25,4 +30,11 @@ gulp.task("babel", () => {
             presets: ["@babel/env"]
         }))
         .pipe(gulp.dest("./dist/js/"))
+})
+
+gulp.task("browserify", () => {
+    return gulp.src("./dist/js/index.js")
+        .pipe(browserify())
+        .pipe(rename("build.js"))
+        .pipe(gulp.dest("./dist/js"))
 })
