@@ -1,0 +1,13 @@
+#box {
+  width: 1000px;
+  height: 400px;
+}
+#box #con {
+  width: 200px;
+  height: 500px;
+  background-color: blue;
+}
+
+body {
+  background-color: yellow;
+}

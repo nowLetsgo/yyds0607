@@ -1,5 +1,5 @@
 import add from './add';
 
-add(1, 2);
+add(2, 2);
 
 console.log(1 === "1");
