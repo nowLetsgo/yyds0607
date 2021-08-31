@@ -38,3 +38,6 @@ gulp.task("browserify", () => {
         .pipe(rename("build.js"))
         .pipe(gulp.dest("./dist/js"))
 })
+
+//对上边的三个任务统一配置，要按照顺序依次执行 需要使用gulp.series方法
+gulp.task("js-dev", gulp.series(["jshint", "babel", "browserify"]))
