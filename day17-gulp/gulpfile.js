@@ -94,5 +94,40 @@ gulp.task("connect", () => {
     gulp.watch("src/js/*.js", gulp.series(["js-dev"]))
 })
 
-//统一配置开发环境的编译和启动服务器
+//统一配置开发环境的编译和启动服务器(gulp watch 启动开发环境)
 gulp.task("watch", gulp.series(["dev", "connect"]))
+
+
+
+//生产环境的配置
+const uglify = require("gulp-uglify");
+const cssmin = require("gulp-cssmin");
+const htmlmin = require("gulp-htmlmin");
+
+gulp.task("uglify", () => {
+    return gulp.src("./dist/js/build.js")
+        .pipe(uglify())
+        .pipe(rename("build.min.js"))
+        .pipe(gulp.dest("./build/js"))
+})
+
+gulp.task("cssmin", () => {
+    return gulp.src("./dist/css/all.css")
+        .pipe(cssmin())
+        .pipe(rename("all.min.css"))
+        .pipe(gulp.dest("./build/css"))
+})
+
+gulp.task("htmlmin", () => {
+    return gulp.src("./src/index.html")
+        .pipe(htmlmin({
+            collapseWhitespace: true, //取掉空格和换行符
+            removeComments: true, //删除注释
+        }))
+        .pipe(gulp.dest("./build"))
+})
+
+//生产环境的统一配置（gulp build是启动生产环境）
+gulp.task("js-prod", gulp.series(["js-dev", "uglify"]))
+gulp.task("css-prod", gulp.series(["less", "cssmin"]))
+gulp.task("build", gulp.parallel(["js-prod", "css-prod", "htmlmin"]))
