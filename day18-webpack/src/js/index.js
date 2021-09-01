@@ -3,6 +3,7 @@ import add from './add';
 //引入html依赖的less
 import "../less/01.less";
 import "../less/02.less";
+import "../less/iconfont.css"
 
 add(1, 2);
 

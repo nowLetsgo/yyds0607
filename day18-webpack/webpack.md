@@ -89,7 +89,7 @@
   };
   ```
   
-- 运行指令： `npx webpack`
+- 运行指令： `webpack`
 
 ## 5、js 语法检查
 
@@ -105,7 +105,7 @@
   - `npm install eslint --save-dev`
 - 配置 plugin
   ```js
-  plugins: [new ESLintPlugin(options)],
+  plugins: [new ESLintPlugin()],
   ```
 - eslint 要想工作，必须定义配置文件，配置文件有两种写法
   - `.eslintrc.js`
@@ -220,7 +220,7 @@
 
   ```js
   {
-    test: /\.(png|jpe?g|gif|svg)$/,
+    test: /\.(png|jpeg|gif|svg)$/,
     type: "asset",
     parser: {
       dataUrlCondition: {
