@@ -316,7 +316,6 @@
 - 修改 webpack 配置对象（注意不是 loader 中）
   ```js
   devServer: {
-    contentBase: './build',  // 打包根路径
     port: 8080, // 端口号
     open: true  // 自动打开浏览器
   },
@@ -399,7 +398,6 @@
   ```js
   new MiniCssExtractPlugin({
     filename: "css/[name].[contenthash:8].css",
-    chunkFilename: "css/[id].[contenthash:8].css",
   }),
   ```
   
@@ -407,28 +405,9 @@
   - npm run build
   - serve -s dist
   
-  **问题: **
   
-  图片和字体图标查找路径有问题
   
-  **解决:**
   
-  ```json
-  {
-          test: /\.less$/,
-          use: [
-            {
-              loader: MiniCssExtractPlugin.loader,
-              options: {
-                publicPath: '../',
-              },
-            },
-            'css-loader',
-            'postcss-loader',
-            'less-loader',
-          ],
-        },
-  ```
   
   
 
@@ -444,7 +423,7 @@
     use: [
       MiniCssExtractPlugin.loader,
       'css-loader',
-      'postcss-loader',
+      'postcss-loader',//新增postcss-loader
       'less-loader',
     ]
   }
