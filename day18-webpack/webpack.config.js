@@ -1,4 +1,6 @@
 const path = require("path");
+//引入eslint插件
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     //1.入口文件
@@ -12,8 +14,13 @@ module.exports = {
         filename: "./js/main.js"
     },
 
+    //4.插件
+    plugins: [
+        new ESLintPlugin(),
+    ],
+
     //5.模式
     // mode: "development", //开发环境配置（二选一）
     mode: "production" //生产环境配置（二选一）
 
-}
+};
