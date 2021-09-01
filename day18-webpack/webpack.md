@@ -319,7 +319,6 @@
     contentBase: './build',  // 打包根路径
     port: 8080, // 端口号
     open: true  // 自动打开浏览器
-    progress: true, // 进度条
   },
   ```
 - 运行指令：`webpack serve`

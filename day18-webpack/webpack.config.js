@@ -62,4 +62,11 @@ module.exports = {
     mode: "development", //开发环境配置（二选一）
     // mode: "production" //生产环境配置（二选一）
 
+
+    //服务器的配置信息
+    devServer: {
+        port: 8888, // 端口号
+        open: true // 自动打开浏览器
+    }
+
 };
