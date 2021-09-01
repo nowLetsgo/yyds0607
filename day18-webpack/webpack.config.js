@@ -1,6 +1,7 @@
 const path = require("path");
 //引入eslint插件
 const ESLintPlugin = require('eslint-webpack-plugin');
+const HtmlWebpackPlugin = require("html-webpack-plugin")
 
 module.exports = {
     //1.入口文件
@@ -52,6 +53,9 @@ module.exports = {
     //4.插件
     plugins: [
         new ESLintPlugin(),
+        new HtmlWebpackPlugin({
+            template: "./src/index.html"
+        })
     ],
 
     //5.模式
