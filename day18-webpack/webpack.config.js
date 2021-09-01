@@ -14,13 +14,31 @@ module.exports = {
         filename: "./js/main.js"
     },
 
+    //3.loader
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            use: {
+                //babel-loader 把es6语法编译为ES5语法
+                loader: 'babel-loader',
+                options: {
+                    presets: ['@babel/preset-env']
+                }
+            }
+        }, {
+            test: /\.less$/i,
+            use: ["style-loader", "css-loader", "less-loader"]
+        }, ]
+    },
+
     //4.插件
     plugins: [
         new ESLintPlugin(),
     ],
 
     //5.模式
-    // mode: "development", //开发环境配置（二选一）
-    mode: "production" //生产环境配置（二选一）
+    mode: "development", //开发环境配置（二选一）
+    // mode: "production" //生产环境配置（二选一）
 
 };
